@@ -1,10 +1,10 @@
 [
   {
-    "author": "Humza",
+    "author": 2,
     "quiz_title": "Advanced Couchsurfing"
   },
   {
-    "name": "Peter Parker",
+    "author": 1,
     "quiz_title": "What does a Spider do?"
   }
 ]
