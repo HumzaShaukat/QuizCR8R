@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS quizlit_db;
+CREATE DATABASE quizlit_db;
