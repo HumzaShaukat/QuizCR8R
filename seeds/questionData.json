@@ -1,0 +1,20 @@
+[
+  {
+    "question": "What is an integer?",
+    "choice1": "Any number",
+    "choice2": "A good number",
+    "choice3": "A number with no decimals besides 0",
+    "choice4": "A whole number",
+    "answer": "choice3",
+    "quiz_id": 1
+  },
+  {
+    "question": "What shape does the Pythagorean Theorem reference?",
+    "choice1": "A triangle",
+    "choice2": "A right triangle",
+    "choice3": "A square",
+    "choice4": "A circle",
+    "answer": "choice2",
+    "quiz_id": 1
+  }
+]
