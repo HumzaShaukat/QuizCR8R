@@ -1,5 +1,5 @@
 const User = require('./User');
-const QuizList = require('./QuizList');
+const QuizList = require('./QuizList.js');
 const Question = require('./Question');
 
 
