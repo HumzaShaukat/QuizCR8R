@@ -6,7 +6,7 @@ router.post("/", async (req, res) => {
     const newQuizList = QuizList.create({
       ...req.body,
     });
-    res.status(200).json(newQuizList);
+    res.redirect(".create-question.js");
   } catch (err) {
     res.status(500).json(err);
   }
