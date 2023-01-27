@@ -58,3 +58,24 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 })
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const questionId = await Question.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!questionId) {
+      res.status(404).json({ message: 'No question found with this id!' });
+      return;
+    }
+
+    res.status(200).json(questionId);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+module.exports = router;
