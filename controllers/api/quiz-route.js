@@ -33,3 +33,14 @@ router.put("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get("/", async (req, res) => {
+  try {
+    const quizList = await QuizList.findAll();
+    res.render("quizlist", quizList);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/:id", async (req, res) => {});
