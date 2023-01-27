@@ -51,4 +51,4 @@ Question.init(
   }
 );
 
-model.exports = Question;
+module.exports = Question;
