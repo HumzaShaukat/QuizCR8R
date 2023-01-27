@@ -1,16 +1,17 @@
 const router = require("express").Router();
-const { Question } = require("../../models");
+const { Question, QuizList } = require("../../models");
 
 router.post('/', async (req, res) => {
   try {
     const newQuestion = await Question.create({
-      question: req.body.question,
-      choice1: req.body.choice1,
-      choice2: req.body.choice2,
-      choice3: req.body.choice3,
-      choice4: req.body.choice4,
-      answer: req.body.answer,
-      quiz_id: req.body.quiz_id,
+      ...req.body,
+      // question: req.body.question,
+      // choice1: req.body.choice1,
+      // choice2: req.body.choice2,
+      // choice3: req.body.choice3,
+      // choice4: req.body.choice4,
+      // answer: req.body.answer,
+      // quiz_id: req.body.quiz_id,
     });
     res.status(200).json(newQuestion)
   } catch (err) {
@@ -18,7 +19,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put("/:question", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const updateQuestion = Question.update(
       {
@@ -28,8 +29,13 @@ router.put("/:question", async (req, res) => {
         choice3: req.body.choice3,
         choice4: req.body.choice4,
         answer: req.body.answer,
-        quiz_id: req.body.quiz_id,
+        quiz_id: req.body.quiz_id
       },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
     );
     if (!updateQuestion) {
       res.status(400).json({ message: "Could not update question!" });
@@ -43,8 +49,9 @@ router.put("/:question", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const questionList = await Question.findAll();
-    res.render("question", questionList);
+    const questionData = await Question.findAll();
+    const questions = questionData.map((question) => question.get({ plain: true }))
+    res.render("questions", { questions });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -52,8 +59,12 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const questionId = await Question.findAll();
-    res.render("question", questionId);
+    const questionData = await Question.findByPk(req.params.id, {
+      include: QuizList
+    });
+    const question = questionData.get({ plain: true });
+    console.log(question)
+    res.render("question", { question });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -61,18 +72,18 @@ router.get("/:id", async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const questionId = await Question.destroy({
+    const questionData = await Question.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-    if (!questionId) {
+    if (!questionData) {
       res.status(404).json({ message: 'No question found with this id!' });
       return;
     }
 
-    res.status(200).json(questionId);
+    res.status(200).json(questionData);
   } catch (err) {
     res.status(500).json(err);
   }
