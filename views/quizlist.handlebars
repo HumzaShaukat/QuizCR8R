@@ -4,10 +4,10 @@
       Quiz List
     </h2>
   </div>
-  {{#each quizList as |quizList|}}
+  {{#each quizzes}}
   <div class="quizList col-md-4">
-    <p>
-      {{quizList.quiz_title}}
+    <p quiz-id="{{id}}">
+      <a href="/quizzes/{{id}}"> {{quiz_title}}
     </p>
   </div>
   {{/each}}
