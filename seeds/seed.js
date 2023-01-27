@@ -1,5 +1,5 @@
 const sequelize = require('../config/connection');
-const { User, Question, Quiz } = require('../models');
+const { User, Question, QuizList } = require('../models');
 
 const userData = require('./userData.json');
 const quizData = require('./quizData.json');
@@ -15,7 +15,7 @@ const seedDatabase = async () => {
   }
 
   for (const quiz of quizData) {
-    await Quiz.create({
+    await QuizList.create({
       ...quiz,
     });
   }
