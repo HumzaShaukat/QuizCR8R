@@ -1,0 +1,14 @@
+<div class="quizlist-container">
+  <div class="card-header col-md-12 text-center">
+    <h2>
+      Question List
+    </h2>
+  </div>
+  {{#each questions}}
+  <div class="quizList col-md-4">
+    <p quiz-id="{{id}}">
+      <a href="questions/{{id}}"> {{question}}
+    </p>
+  </div>
+  {{/each}}
+</div>
