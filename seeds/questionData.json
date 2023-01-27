@@ -16,5 +16,14 @@
     "choice4": "A circle",
     "answer": "choice2",
     "quiz_id": 1
+  },
+  {
+    "question": "Tiger Woods is a ___.",
+    "choice1": "A square",
+    "choice2": "A weirdo",
+    "choice3": "A sorcerer",
+    "choice4": "A golfer",
+    "answer": "choice4",
+    "quiz_id": 2
   }
 ]

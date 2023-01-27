@@ -1,0 +1,18 @@
+<div class="quizlist-container">
+  <div class="card-header col-md-12 text-center">
+    <h2>
+      {{quiz.quiz_title}}
+    </h2>
+  </div>
+  {{#each quiz.questions}}
+  <div class="quizList col-md-4">
+    <p>{{question}}</p>
+    <p data-index="choice1">A&#41 {{choice1}}</p>
+    <p data-index="choice2">B&#41 {{choice2}}</p>
+    <p data-index="choice3">C&#41 {{choice3}}</p>
+    <p data-index="choice4">D&#41 {{choice4}}</p>
+    <p> Correct Answer {{answer}}</p>
+    <br>
+  </div>
+  {{/each}}
+</div>

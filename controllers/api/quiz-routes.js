@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { QuizList } = require("../../models");
+const { QuizList, Question } = require("../../models");
 
 router.post("/", async (req, res) => {
   try {
@@ -36,8 +36,9 @@ router.put("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const quizList = await QuizList.findAll();
-    res.render("quizlist", quizList);
+    const quizData = await QuizList.findAll();
+    const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
+    res.render("quizlist", { quizzes });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -45,12 +46,16 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const quizList = await QuizList.findByPk(req.params.id);
-    if (!quizList) {
+    const quizData = await QuizList.findByPk(req.params.id, {
+      include: Question
+    });
+    const quiz = quizData.get({ plain: true })
+    console.log(quiz.questions)
+    if (!quizData) {
       res.status(400).json({ message: "Quiz Not Found" });
       return;
     }
-    res.render("quizlist", quizList);
+    res.render("quizdata", { quiz });
   } catch (err) {
     res.status(500).json(err);
   }
