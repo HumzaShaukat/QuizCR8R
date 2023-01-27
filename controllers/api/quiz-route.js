@@ -55,7 +55,7 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+//temp comment
 router.delete("/:id", async (req, res) => {
   try {
     const delQuiz = await QuizList.destroy({
