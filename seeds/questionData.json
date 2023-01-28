@@ -24,6 +24,15 @@
     "choice3": "A sorcerer",
     "choice4": "A golfer",
     "answer": "choice4",
-    "quiz_id": 2
+    "quiz_id": 1
+  },
+  {
+    "question": "Mic Check 1, 2, 1, 2",
+    "choice1": "Check",
+    "choice2": "Check",
+    "choice3": "Check",
+    "choice4": "Check",
+    "answer": "choice1",
+    "quiz_id": 1
   }
 ]

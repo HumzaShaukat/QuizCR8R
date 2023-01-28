@@ -1,14 +1,10 @@
-<div class="quizlist-container">
-  <div class="card-header col-md-12 text-center">
-    <h2>
-      Quiz List
-    </h2>
+<div id="quizlist-container">
+  <div class="main-title">
+    <h2>Quizzes</h2>
   </div>
+  <div id="quizlist">
   {{#each quizzes}}
-  <div class="quizList col-md-4">
-    <p quiz-id="{{id}}">
-      <a href="/quizzes/{{id}}"> {{quiz_title}}
-    </p>
-  </div>
+      <a href="/quizzes/{{id}}" quiz-id="{{id}}" class="quiz-link">{{quiz_title}}</a>
   {{/each}}
+  </div>
 </div>

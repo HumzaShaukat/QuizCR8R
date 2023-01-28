@@ -37,10 +37,28 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`));
 });
+
+module.exports = function () {
+  var loadJS = function (user, options) {
+    var partialsDir = __dirname + '/../loadjs';
+    var filenames = fs.readdirSync(partialsDir);
+
+    filenames.forEach(function (filename) {
+      var matches = /^([^.]+).hbs$/.exec(filename);
+      if (!matches) {
+        return;
+      }
+      var name = matches[1];
+      var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+      hbs.registerPartial(name, template);
+    });
+  }
+  loadJS();
+}

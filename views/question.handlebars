@@ -1,17 +1,19 @@
-<div class="quizlist-container">
-  <div class="card-header col-md-12 text-center">
-    <h2>
-      Question Details
-    </h2>
+<div id="question-box">
+  <div class="main-title">
+    <h2>Question Details</h2>
   </div>
-  <div class="quizList col-md-4">
-    <p>{{question.question}}</p>
-    <p>{{question.choice1}}</p>
-    <p>{{question.choice2}}</p>
-    <p>{{question.choice3}}</p>
-    <p>{{question.choice4}}</p>
-    <p>{{question.answer}}</p>
+  <div id="question-data">
+    <h5>{{question.question}}</h5>
+    <ul>
+      <li>A&#41 {{question.choice1}}</li>
+      <li>B&#41 {{question.choice2}}</li>
+      <li>C&#41 {{question.choice3}}</li>
+      <li>D&#41 {{question.choice4}}</li>
+      <li>Correct Answer: {{question.answerMatch}}</li>
+    </ul>
   </div>
-  <button id="delete-question-btn">Delete Question</button>
-  <button id="update-question-btn">Update Question</button>
+  <div class="btn-box">
+    <button class="btn" id="delete-question-btn">Delete Question</button>
+    <button class="btn" id="update-question-btn">Update Question</button>
+  </div>
 </div>
