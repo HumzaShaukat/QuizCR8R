@@ -47,10 +47,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id, {
-      include: Question
+      include: Question,
     });
-    const quiz = quizData.get({ plain: true })
-    console.log(quiz.questions)
+    const quiz = quizData.get({ plain: true });
     if (!quizData) {
       res.status(400).json({ message: "Quiz Not Found" });
       return;
