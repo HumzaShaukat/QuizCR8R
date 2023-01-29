@@ -1,13 +1,17 @@
 const router = require("express").Router();
 const withAuth = require('../../utils/auth')
-const { User, QuizList, Question } = require('../../models/');
+const { User, QuizList } = require('../../models/');
 
 router.get('/', async (req, res) => {
     try {
-      res.render('profile');
+      const quizData = await QuizList.findAll({include: User});
+      const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
+      console.log(quizzes)
+      res.render("profile", { quizzes });
     } catch (err) {
       res.status(500).json(err);
     }
+  
   });
 
 router.get('/login', (req, res) => {

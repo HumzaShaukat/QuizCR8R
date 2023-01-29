@@ -1,27 +1,15 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
-  </div>
+<div class="main-title">
+  <h2>Welcome, {{quizzes}}!</h2>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Create a new quiz:</h3>
-    <div class="create-group">
-        <button type="submit" class="btn btn-primary">Start</button>
-    </div>
+<div id="profile-box">
+  <h3>Created Quizzes:</h3>
+  <div>
+    {{#each quizzes}}
+    <a class="quiz-title quiz-link" href="/quizzes/{{id}}">{{quiz_title}}</a>
+    {{/each}}
   </div>
-
-  <div class="col-md-6 quiz-list">
-    <h3>Created Quizes:</h3>
-   {{#each quizList as |quizList|}}
-  <div class="quizList col-md-4">
-    <p>
-      {{quizList.quiz_title}}
-    </p>
-  </div>
-  {{/each}}
-  </div>
+  <button class="btn" href="/create">Create A Quiz</button>
 </div>
 
 <script src="./js/profile.js"></script>

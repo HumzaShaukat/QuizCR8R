@@ -1,20 +1,23 @@
-<div class="quizlist-container">
-  <div class="card-header col-md-12 text-center">
-    <h2>
-      {{quiz.quiz_title}}
-    </h2>
+<div id="quizdata-container">
+  <div class="main-title">
+    <h2>{{quiz.quiz_title}}</h2>
   </div>
-  {{#each quiz.questions}}
-  <div class="quizList col-md-4">
-    <p>{{question}}</p>
-    <p data-index="choice1">A&#41 {{choice1}}</p>
-    <p data-index="choice2">B&#41 {{choice2}}</p>
-    <p data-index="choice3">C&#41 {{choice3}}</p>
-    <p data-index="choice4">D&#41 {{choice4}}</p>
-    <p> Correct Answer {{answer}}</p>
-    <br>
+  <div class="quiz-questions">
+    {{#each quiz.questions}}
+    <div class="question-data">
+      <h5>{{question}}</h5>
+      <ul>
+        <li data-index="choice1">A&#41 {{choice1}}</li>
+        <li data-index="choice2">B&#41 {{choice2}}</li>
+        <li data-index="choice3">C&#41 {{choice3}}</li>
+        <li data-index="choice4">D&#41 {{choice4}}</li>
+        <li> Correct Answer: {{answerMatch}}</li><br>
+      </ul>
+    </div>
+    {{/each}}
   </div>
-  {{/each}}
-  <button id="delete-quiz-btn">Delete Quiz</button>
-  <button id="update-quiz-btn">Update Quiz</button>
+  <div class="btn-box">
+    <button class="btn" id="delete-quiz-btn">Delete Quiz</button>
+    <button class="btn" id="update-quiz-btn">Update Quiz</button>
+  </div>
 </div>
