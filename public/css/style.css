@@ -113,6 +113,7 @@ h3 {
 .form-input {
     padding: 5px 10px;
     margin-left: 10px;
+    width: 85%;
 }
 
 #quizdata-container {
@@ -230,6 +231,9 @@ h3 {
 }
 
 #create-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100vw;
 }
 
@@ -248,10 +252,43 @@ h3 {
 #radio-box {
     display: flex;
     justify-content: space-between;
+    width: 85%;
+    margin-left: 10px;
+    align-items: center; 
+    padding: 5.8px 10.8px;
+    margin-left: 10px;
+    border: .8px transparent whitesmoke;
+}
+
+.choices {
+    display: flex;
+    width: 90%;
+    justify-content:flex-start;
+    margin: 10px;
+    align-items: center;
+    padding: 5px;
+}
+
+.select-answer {
+    display: flex;
+    width: 15%;
+    align-items: center;
+    font-size: 1.2em;
+    justify-content: flex-end;
+}
+
+.question-label {
+    display: flex;
+    width: 15%;
+    justify-content: flex-end;
 }
 
 footer {
     display: flex;
     justify-content: center;
     padding: 5px;
+}
+
+.hidden {
+    display: none !important;
 }
