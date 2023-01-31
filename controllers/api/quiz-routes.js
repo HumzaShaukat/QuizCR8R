@@ -3,14 +3,19 @@ const { QuizList, Question } = require("../../models");
 
 router.post("/", async (req, res) => {
   try {
-    const newQuizList = QuizList.create({
-      ...req.body,
+    const newQuizList = await QuizList.create({
+      user_id: req.body.user_id,
+      quiz_title: req.body.quiz_title
     });
-    res.status(200).json(newQuizList);
+    res.status(200).json(newQuizList.id);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+router.get("/:title", async (req, res ) => {
+
+})
 
 router.put("/:id", async (req, res) => {
   try {
@@ -49,17 +54,23 @@ router.get("/:id", async (req, res) => {
     const quizData = await QuizList.findByPk(req.params.id, {
       include: Question,
     });
-    const quiz = quizData.get({ plain: true })
+    const quiz = quizData.get({ plain: true });
     for (var i = 0; i < quiz.questions.length; i++) {
       let answerMatch;
       if (quiz.questions[i].answer === Object.keys(quiz.questions[0])[2]) {
-        answerMatch = 'A';
-      } else if (quiz.questions[i].answer === Object.keys(quiz.questions[0])[3]) {
-        answerMatch = 'B';
-      } else if (quiz.questions[i].answer === Object.keys(quiz.questions[0])[4]) {
-        answerMatch = 'C';
-      } else if (quiz.questions[i].answer === Object.keys(quiz.questions[0])[5]) {
-        answerMatch = 'D';
+        answerMatch = "A";
+      } else if (
+        quiz.questions[i].answer === Object.keys(quiz.questions[0])[3]
+      ) {
+        answerMatch = "B";
+      } else if (
+        quiz.questions[i].answer === Object.keys(quiz.questions[0])[4]
+      ) {
+        answerMatch = "C";
+      } else if (
+        quiz.questions[i].answer === Object.keys(quiz.questions[0])[5]
+      ) {
+        answerMatch = "D";
       }
       quiz.questions[i].answerMatch = answerMatch;
     }

@@ -1,5 +1,5 @@
 var createBtn = document.querySelector("#create-btn");
 
 createBtn.addEventListener("click", function () {
-  location.href = "/create";
+  location.href = "/new-quiz";
 });
