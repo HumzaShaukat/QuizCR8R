@@ -13,10 +13,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:title", async (req, res ) => {
-
-})
-
 router.put("/:id", async (req, res) => {
   try {
     const updateQuizList = QuizList.update(
