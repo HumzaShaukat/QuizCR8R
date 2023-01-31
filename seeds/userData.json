@@ -1,9 +1,11 @@
 [
   {
+    "username": "lebronJames",
     "email": "user@email.com",
     "password": "password"
   },
   {
+    "username":"howardrocks",
     "email": "user2@email.com",
     "password": "password"
   }
