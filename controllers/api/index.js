@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const question = require("./question-routes");
 const quizList = require("./quiz-routes");
-const homeRoutes = require('./home-routes');
 const createRoutes = require('./create-routes');
 const userRoutes = require('./user-routes');
 
