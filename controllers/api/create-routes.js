@@ -34,13 +34,13 @@ const { QuizList, Question, User } = require("../../models");
 //   }
 // });
 
-router.get("/", async (req, res) => {
-  try {
-    res.render("create");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get("/", async (req, res) => {
+//   try {
+//     res.render("create");
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //temp comment
 

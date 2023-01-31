@@ -3,15 +3,18 @@ const withAuth = require('../utils/auth')
 const { User, QuizList } = require('../models');
 
 router.get('/', async (req, res) => {
-  try {
-    const quizData = await QuizList.findAll({ include: User });
-    const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
-    console.log(quizzes)
-    res.render("profile", { quizzes });
-  } catch (err) {
-    res.status(500).json(err);
+  if (req.session.loggedIn) {
+    try {
+      const quizData = await QuizList.findAll({ include: User });
+      const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
+      console.log(quizzes)
+      res.redirect('/profile', );
+    } catch (err) {
+      res.status(500).json(err);
+    }
+    return;
   }
-
+  res.render('login');
 });
 
 router.get('/login', (req, res) => {
@@ -19,7 +22,20 @@ router.get('/login', (req, res) => {
     res.redirect('/profile');
     return;
   }
+  res.render('login');
+});
 
+router.get('/profile', async (req, res) => {
+  if (req.session.loggedIn) {
+    const quizData = await QuizList.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+    const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
+    res.render("profile", { quizzes, loggedIn: req.session.loggedIn });
+    return;
+  }
   res.render('login');
 });
 
