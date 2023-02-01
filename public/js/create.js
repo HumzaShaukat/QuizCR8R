@@ -1,5 +1,15 @@
 var quizID;
+ //this function resets the page so the next question can be added
+function nextQuestion(){
+    document.querySelector("#question-input").value ='';
+    document.querySelector("#choice1-input").value ='';
+    document.querySelector("#choice2-input").value='';
+    document.querySelector("#choice3-input").value='';
+    document.querySelector("#choice4-input").value='';
+    location.reload();
+}
 
+//creates postrequest for quiz title
 async function postQuiz(event) {
     event.preventDefault();
     const quizTitle = await {
@@ -19,6 +29,7 @@ async function postQuiz(event) {
   });
 }
 
+//creates post request for questions
 async function postQuestion(event) {
     event.preventDefault();
     var iD = document.querySelector('#create-box');
@@ -37,14 +48,25 @@ async function postQuestion(event) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(postInfo),
-    }).then(async function (data) {
-        console.log(data);
+    }).then(function (data) {
+        nextQuestion();
     });
     }
+
+//once the dynamic buttons exists, then they will be clickable
 
     if (document.querySelector("#save-quiz-btn")) {
         document.querySelector("#save-quiz-btn").addEventListener("click", postQuiz);
     }
 
-    document.querySelector(".add-question-btn").addEventListener("click", postQuestion);
+    if (document.querySelector(".add-question-btn")) {
+        document.querySelector(".add-question-btn").addEventListener("click", postQuestion);
+    }
 
+    if (document.querySelector(".finish-quiz-btn")) {
+        document.querySelector(".finish-quiz-btn").addEventListener("click", function () {
+            location.href = "/profile"
+        })
+    }
+
+    
