@@ -1,5 +1,14 @@
 var quizID;
 
+function nextQuestion(){
+    document.querySelector("#question-input").value ='';
+    document.querySelector("#choice1-input").value ='';
+    document.querySelector("#choice2-input").value='';
+    document.querySelector("#choice3-input").value='';
+    document.querySelector("#choice4-input").value='';
+    location.reload();
+}
+
 async function postQuiz(event) {
     event.preventDefault();
     const quizTitle = await {
@@ -37,8 +46,8 @@ async function postQuestion(event) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(postInfo),
-    }).then(async function (data) {
-        console.log(data);
+    }).then(function (data) {
+        nextQuestion();
     });
     }
 
@@ -48,3 +57,10 @@ async function postQuestion(event) {
 
     document.querySelector(".add-question-btn").addEventListener("click", postQuestion);
 
+    if (document.querySelector(".finish-quiz-btn")) {
+        document.querySelector(".finish-quiz-btn").addEventListener("click", function() {
+            location.href = "/profile"
+        })
+    }
+
+    
