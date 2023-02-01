@@ -53,7 +53,7 @@ router.get("/update-question/:id", async (req, res) => {
     }
     question.answerMatch = answerMatch;
 
-    res.render("question", { question });
+    res.render("update-question", { question });
   } catch (err) {
     res.status(500).json(err);
   }
