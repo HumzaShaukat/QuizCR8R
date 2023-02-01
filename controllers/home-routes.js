@@ -5,10 +5,10 @@ const { User, QuizList } = require('../models');
 router.get('/', async (req, res) => {
   if (req.session.loggedIn) {
     try {
-      const quizData = await QuizList.findAll({ include: User });
-      const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
-      console.log(quizzes)
-      res.redirect('/profile', );
+      // const quizData = await QuizList.findAll({ include: User });
+      // const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
+      // const username = req.session.username
+      res.redirect('/profile');
     } catch (err) {
       res.status(500).json(err);
     }
@@ -33,7 +33,8 @@ router.get('/profile', async (req, res) => {
       },
     });
     const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
-    res.render("profile", { quizzes, loggedIn: req.session.loggedIn });
+    const username = req.session.username
+    res.render("profile", { quizzes, username, loggedIn: req.session.loggedIn });
     return;
   }
   res.render('login');
