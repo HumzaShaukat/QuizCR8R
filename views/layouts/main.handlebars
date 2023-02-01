@@ -14,7 +14,7 @@
     <h1>
       Quiz Cr8r
     </h1>
-    {{#if logged_in}}
+    {{#if loggedIn}}
     <nav>
       <button class="no-button" id="logout">logout</button>
     </nav>
@@ -24,12 +24,13 @@
     {{{ body }}}
   </main>
   <footer>
-      © 2023 Team Awesome-O
+    © 2023 Team Awesome-O
   </footer>
 
-  {{#if logged_in}}
+</body>
+<script src="/js/jass.js"></script>
+  {{#if loggedIn}}
   <script src="/js/logout.js"></script>
   {{/if}}
-</body>
 
 </html>
