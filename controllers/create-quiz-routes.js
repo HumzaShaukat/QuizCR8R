@@ -5,9 +5,10 @@ newRouter.get("/", async (req, res) => {
   res.render("quiz-title-form");
 });
 
-newRouter.get("/:id/new-question", async (req, res) => {
+newRouter.get("/new-question/:id", async (req, res) => {
     try {
-      res.render("create");
+      const id = req.params.id;
+      res.render("create", {id});
     } catch (err) {
       res.status(500).json(err);
     }

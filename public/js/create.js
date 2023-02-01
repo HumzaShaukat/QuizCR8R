@@ -1,3 +1,5 @@
+var quizID;
+
 async function postQuiz(event) {
     event.preventDefault();
     const quizTitle = await {
@@ -12,37 +14,37 @@ async function postQuiz(event) {
     body: JSON.stringify(quizTitle),
   }).then(async (response)=> await response.json())
   .then(async function (data) {
-    location.href = `/new-quiz/${data}/new-question`;
+    quizID = data;
+    location.href = `/new-quiz/new-question/${data}`;
   });
-}
-
-async function getQuizID(title) {
-    var title = await QuizList.findOne({
-        where: {
-            quiz_title: title
-    }})
-    return title.id;
 }
 
 async function postQuestion(event) {
     event.preventDefault();
+    var iD = document.querySelector('#create-box');
+    let postInfo = {
+        question: document.querySelector("#question-input").value,
+        choice1: document.querySelector("#choice1-input").value,
+        choice2: document.querySelector("#choice2-input").value,
+        choice3: document.querySelector("#choice3-input").value,
+        choice4: document.querySelector("#choice4-input").value,
+        answer: document.querySelector('input[name="correct-answer"]:checked').value,
+        quiz_id: iD.getAttribute('quizId') 
+        };
     fetch("/api/questions", {
-      method: "POST",
-      body: JSON.stringify({
-        question: document.querySelector("#question-input").value.trim(),
-        choice1: document.querySelector("#choice1-input").value.trim(),
-        choice2: document.querySelector("#choice2-input").value.trim(),
-        choice3: document.querySelector("#choice3-input").value.trim(),
-        choice4: document.querySelector("#choice4-input").value.trim(),
-        answer: document
-          .querySelector('input[name="radio-choices"]:checked')
-          .val(),
-        quiz_id: req.params.id
-      }),
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postInfo),
     }).then(async function (data) {
-      console.log(data);
+        console.log(data);
     });
-  }
+    }
 
-document.querySelector("#save-quiz-btn").addEventListener("click", postQuiz);
-document.querySelector(".add-question-btn").addEventListener("click", postQuestion)
+    if (document.querySelector("#save-quiz-btn")) {
+        document.querySelector("#save-quiz-btn").addEventListener("click", postQuiz);
+    }
+
+    document.querySelector(".add-question-btn").addEventListener("click", postQuestion);
+
