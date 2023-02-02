@@ -32,7 +32,7 @@ async function postQuiz(event) {
 //creates post request for questions
 async function postQuestion(event) {
     event.preventDefault();
-    var iD = document.querySelector('#create-box');
+    var iD = document.querySelector('#create-box'); //id of the quiz is saved in the dom as a custom attribute
     let postInfo = {
         question: document.querySelector("#question-input").value,
         choice1: document.querySelector("#choice1-input").value,
