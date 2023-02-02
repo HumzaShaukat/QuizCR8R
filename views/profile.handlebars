@@ -3,12 +3,19 @@
 </div>
 
 <div id="profile-box">
-  <h3>Created Quizzes:</h3>
-  <div>
-    {{#each quizzes}}
-    <a class="quiz-title quiz-link" href="/quizzes/{{id}}">{{quiz_title}}</a>
-    {{/each}}
+  <div id="user-quiz-box">
+    <h3>Your Quizzes:</h3>
+    <div id="user-quizlist">
+      {{#each quizzes}}
+      <a class="quiz-title quiz-link" href="/quizzes/{{id}}">{{quiz_title}}</a>
+      {{/each}}
+    </div>
   </div>
-  <button class="btn" id ="create-btn">Create A Quiz</button>
+  <div id="create-btn-box">
+    <a class="quiz-title quiz-link" href="/new-quiz" id="create-btn">Create a Quiz</a>
+  </div>
+  <div id="update-user-btn-box">
+    <a class="quiz-title quiz-link" href="/update-user" id="update-user-btn">Update your information</a>
+  </div>
 </div>
 <script src="./js/profile.js"></script>
