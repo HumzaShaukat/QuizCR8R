@@ -64,8 +64,9 @@ async function postQuestion(event) {
     }
 
     if (document.querySelector(".finish-quiz-btn")) {
-        document.querySelector(".finish-quiz-btn").addEventListener("click", function () {
-            location.href = "/profile"
+        document.querySelector(".finish-quiz-btn").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.location.replace('/profile');
         })
     }
 
