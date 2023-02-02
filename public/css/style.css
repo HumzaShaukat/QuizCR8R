@@ -86,20 +86,10 @@ h3 {
     transition-duration: .5s;
 }
 
-#login-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid whitesmoke;
-    border-radius: 8px;
-    width: 40%;
-    padding: 5px;
-    margin: 50px 10px 10px 10px;
-}
-
 #login-form {
     margin: 5px;
     padding: 5px;
+    width: 100%;
 }
 
 .form-line {
@@ -219,7 +209,7 @@ h3 {
     align-items: center;
     border: 1px solid whitesmoke;
     border-radius: 8px;
-    width: 40%;
+    width: 60%;
     padding: 5px;
     margin: 50px 5px 5px 5px;
 }

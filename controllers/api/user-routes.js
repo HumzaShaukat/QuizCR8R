@@ -78,16 +78,15 @@ router.post('/logout', (req, res) => {
 
 // Update
 router.put('/update-user/:id', async (req, res) => {
-  console.log(req.session)
   try {
     if (req.session.loggedIn) {
-
       const dbUserData = await User.findOne({
         where: {
           id: req.session.user_id,
         },
       });
-
+      console.log('---------------------------------------------------------------------')
+      console.log(dbUserData)
       if (!dbUserData) {
         res
           .status(400)
@@ -96,7 +95,8 @@ router.put('/update-user/:id', async (req, res) => {
       }
 
       const validPassword = await dbUserData.checkPassword(req.body.oldPassword);
-
+      console.log('++++++++++++++++++++++++++++++++++++++++++++++++')
+      console.log(validPassword)
       if (!validPassword) {
         res
           .status(400)
@@ -108,19 +108,22 @@ router.put('/update-user/:id', async (req, res) => {
           id: req.params.id,
         },
       });
+      console.log('________________________________________________________________')
+      console.log(newDbUserData)
 
       if (newDbUserData) {
         req.session.save(() => {
           req.session.loggedIn = true;
-          req.session.username = dbUserData.username;
-          req.session.email = dbUserData.email;
-          req.session.user_id = dbUserData.id
+          req.session.username = newDbUserData.username;
+          req.session.email = newDbUserData.email;
+          req.session.user_id = newDbUserData.id
     
           res
             .status(200)
-            .json({ user: dbUserData, message: 'You have updated your profile!' })
-            .end();
+            .json({ user: newdbUserData, message: 'You have updated your profile!' })
         });
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        console.log(req.session)
       } else {
         res.status(404).end();
       }
