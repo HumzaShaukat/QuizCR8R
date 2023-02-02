@@ -1,0 +1,36 @@
+<div user-id="{{user.id}}" id="update-user-box">
+  <div class="width100">
+    <div class="main-title">
+      <h2>Update Your Profile</h2>
+    </div>
+    <form id="update-user-form">
+      <div class="form-line">
+        <label for="username-update" class="form-category">username:</label>
+        <input class="form-input" type="text" id="username-update" value="{{user.username}}"/>
+      </div>
+
+      <div class="form-line">
+        <label for="email-update" class="form-category">email:</label>
+        <input class="form-input" type="text" id="email-update" value="{{user.email}}" />
+      </div>
+
+      <div class="form-line">
+        <label for="new-password-update" class="form-category">new password:</label>
+        <input class="form-input" type="password" id="new-password-update" placeholder="enter new password"/>
+      </div>
+
+      <div class="form-line">
+        <label for="old-password-update" class="form-category">old password:</label>
+        <input class="form-input" type="password" id="old-password-update" placeholder="enter old password"/>
+      </div>
+
+      <div class="form-line form-btn-box">
+        <button class="btn" type="submit" id="update-user-btn">update</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<script src="../js/update-user.js"></script>

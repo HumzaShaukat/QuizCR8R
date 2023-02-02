@@ -40,6 +40,17 @@ router.get('/profile', async (req, res) => {
   res.render('login');
 });
 
+router.get('/update-user', async (req, res) => {
+  if (req.session.loggedIn) {
+    const userData = await User.findByPk(req.session.user_id);
+    const user = userData.get({ plain: true });
+    res.render("update-user", { user });
+    console.log(user)
+    return;
+  }
+  res.render('login');
+});
+
 router.get('/signup', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/profile');

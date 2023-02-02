@@ -44,11 +44,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
-    border-radius: 8px;
-    width: 40%;
-    padding: 5px;
-    margin: 5px;
+    width: 100%;
 }
 
 h3 {
@@ -57,14 +53,19 @@ h3 {
 }
 
 .quiz-title {
-    margin-bottom: 2.5px;
+    margin: 5px;
+    padding:5px;
     font-size: 1.2em;
     font-weight: 700;
 }
 
+#user-quizlist {
+    padding: 5px;
+}
+
 .quiz-title:hover {
     background-color: whitesmoke;
-    color: #38155e; 
+    color: #38155e;
     text-decoration: none;
     transition-duration: .5s;
 }
@@ -106,7 +107,7 @@ h3 {
     width: 90%;
     margin: 10px;
     padding: 5px;
-    align-items: center; 
+    align-items: center;
 }
 
 #login-btn {
@@ -166,14 +167,14 @@ h3 {
 
 .question-link:hover {
     background-color: whitesmoke;
-    color: #38155e; 
+    color: #38155e;
     text-decoration: none;
     transition-duration: .5s;
 }
 
 .quiz-link:hover {
     background-color: whitesmoke;
-    color: #38155e; 
+    color: #38155e;
     text-decoration: none;
     transition-duration: .5s;
 }
@@ -211,7 +212,8 @@ h3 {
     overflow-y: auto;
 }
 
-#login-box, #signup-box {
+#login-box,
+#signup-box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,7 +224,8 @@ h3 {
     margin: 50px 5px 5px 5px;
 }
 
-#signup-btn, #login-btn {
+#signup-btn,
+#login-btn {
     margin-left: 0px;
 }
 
@@ -257,7 +260,7 @@ h3 {
     justify-content: space-between;
     width: 85%;
     margin-left: 10px;
-    align-items: center; 
+    align-items: center;
     padding: 5.8px 10.8px;
     margin-left: 10px;
     border: .8px transparent whitesmoke;
@@ -266,7 +269,7 @@ h3 {
 .choices {
     display: flex;
     width: 90%;
-    justify-content:flex-start;
+    justify-content: flex-start;
     margin: 10px;
     align-items: center;
     padding: 5px;
@@ -293,13 +296,58 @@ h3 {
     cursor: pointer;
     text-decoration: none;
     font-size: 100%;
-  }
+}
 
-  .no-button:hover {
-    color: #38155e; 
+.no-button:hover {
+    color: #38155e;
     text-decoration: none;
     transition-duration: .5s;
-  }
+}
+
+#user-quiz-box,
+#create-btn-box,
+#update-user-btn-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid whitesmoke;
+    border-radius: 8px;
+    width: 40%;
+    padding: 5px;
+    margin: 5px;
+}
+
+#update-user-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid whitesmoke;
+    border-radius: 8px;
+    width: 70%;
+    padding: 5px;
+    margin: 5px;
+}
+
+.width100 {
+    width:100%
+}
+
+#update-user-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-category {
+    display: flex;
+    width:30%;
+    justify-content: flex-end;
+}
+
+.form-btn-box {
+    display: flex;
+    justify-content: center;
+}
 
 footer {
     display: flex;
