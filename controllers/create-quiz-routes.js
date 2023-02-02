@@ -1,5 +1,4 @@
 const newRouter = require("express").Router();
-const questionRouter = require("express").Router({ mergeParams: true });
 
 newRouter.get("/", async (req, res) => {
   res.render("quiz-title-form");
