@@ -5,7 +5,7 @@ router.get("/", async (req, res) => {
     try {
       const quizData = await QuizList.findAll();
       const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
-      res.render("quizlist", { quizzes });
+      res.render("quizlist", { quizzes, loggedIn: req.session.loggedIn });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
         res.status(400).json({ message: "Quiz Not Found" });
         return;
       }
-      res.render("quizdata", { quiz });
+      res.render("quizdata", { quiz, loggedIn: req.session.loggedIn });
     } catch (err) {
       res.status(500).json(err);
     }

@@ -44,11 +44,11 @@ router.get('/update-user', async (req, res) => {
   if (req.session.loggedIn) {
     const userData = await User.findByPk(req.session.user_id);
     const user = userData.get({ plain: true });
-    res.render("update-user", { user });
+    res.render("update-user", { user, loggedIn: req.session.loggedIn });
     console.log(user)
     return;
   }
-  res.render('login');
+  res.render('login', { loggedIn: req.session.loggedIn });
 });
 
 router.get('/signup', (req, res) => {

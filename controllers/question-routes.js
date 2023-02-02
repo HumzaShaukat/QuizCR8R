@@ -5,7 +5,7 @@ router.get("/", async (req, res) => {
   try {
     const questionData = await Question.findAll();
     const questions = questionData.map((question) => question.get({ plain: true }))
-    res.render("questions", { questions });
+    res.render("questions", { questions, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
     }
     question.answerMatch = answerMatch;
 
-    res.render("question", { question });
+    res.render("question", { question, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -53,7 +53,7 @@ router.get("/update-question/:id", async (req, res) => {
     }
     question.answerMatch = answerMatch;
 
-    res.render("update-question", { question });
+    res.render("update-question", { question, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
