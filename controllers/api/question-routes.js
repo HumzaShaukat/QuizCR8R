@@ -29,7 +29,7 @@ router.put("/update-question/:id", async (req, res) => {
         choice3: req.body.choice3,
         choice4: req.body.choice4,
         answer: req.body.answer,
-        quiz_id: req.body.quiz_id
+        quiz_id: req.body.quiz_id,
       },
       {
         where: {

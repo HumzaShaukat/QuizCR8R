@@ -77,61 +77,61 @@ router.post('/logout', (req, res) => {
 });
 
 // Update
-router.put('/update-user/:id', async (req, res) => {
-  try {
-    if (req.session.loggedIn) {
-      const dbUserData = await User.findOne({
-        where: {
-          id: req.session.user_id,
-        },
-      });
-      console.log('---------------------------------------------------------------------')
-      console.log(dbUserData)
-      if (!dbUserData) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect user info. Please try again!' });
-        return;
-      }
+// router.put('/update-user/:id', async (req, res) => {
+//   try {
+//     if (req.session.loggedIn) {
+//       const dbUserData = await User.findOne({
+//         where: {
+//           id: req.session.user_id,
+//         },
+//       });
+//       console.log('---------------------------------------------------------------------')
+//       console.log(dbUserData)
+//       if (!dbUserData) {
+//         res
+//           .status(400)
+//           .json({ message: 'Incorrect user info. Please try again!' });
+//         return;
+//       }
 
-      const validPassword = await dbUserData.checkPassword(req.body.oldPassword);
-      console.log('++++++++++++++++++++++++++++++++++++++++++++++++')
-      console.log(validPassword)
-      if (!validPassword) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect email or password. Please try again!' });
-        return;
-      }
-      const newDbUserData = await User.update(req.body, {
-        where: {
-          id: req.params.id,
-        },
-      });
-      console.log('________________________________________________________________')
-      console.log(newDbUserData)
+//       const validPassword = await dbUserData.checkPassword(req.body.oldPassword);
+//       console.log('++++++++++++++++++++++++++++++++++++++++++++++++')
+//       console.log(validPassword)
+//       if (!validPassword) {
+//         res
+//           .status(400)
+//           .json({ message: 'Incorrect email or password. Please try again!' });
+//         return;
+//       }
+//       const newDbUserData = await User.update(req.body, {
+//         where: {
+//           id: req.params.id,
+//         },
+//       });
+//       console.log('________________________________________________________________')
+//       console.log(newDbUserData)
 
-      if (newDbUserData) {
-        req.session.save(() => {
-          req.session.loggedIn = true;
-          req.session.username = newDbUserData.username;
-          req.session.email = newDbUserData.email;
-          req.session.user_id = newDbUserData.id
+//       if (newDbUserData) {
+//         req.session.save(() => {
+//           req.session.loggedIn = true;
+//           req.session.username = newDbUserData.username;
+//           req.session.email = newDbUserData.email;
+//           req.session.user_id = newDbUserData.id
     
-          res
-            .status(200)
-            .json({ user: newdbUserData, message: 'You have updated your profile!' })
-        });
-        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        console.log(req.session)
-      } else {
-        res.status(404).end();
-      }
-    } else {
-      res.redirect('/login')
-    }
-  } catch (err) {
-    res.status(500).json(err);
-  }
-})
+//           res
+//             .status(200)
+//             .json({ user: newdbUserData, message: 'You have updated your profile!' })
+//         });
+//         console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+//         console.log(req.session)
+//       } else {
+//         res.status(404).end();
+//       }
+//     } else {
+//       res.redirect('/login')
+//     }
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// })
 module.exports = router;
