@@ -1,25 +1,28 @@
 // const quizID = document.querySelector('')
-const checkAnswer = function() {
-    let correctAnswer = document.querySelector('input[name="correct-answer"]:checked').value;
+const checkAnswer = function () {
+    let correctAnswer = document.querySelector(".question-form").getAttribute("correctAnswer");
+    console.log(correctAnswer);
     switch (correctAnswer) {
         case 'choice1':
-            document.querySelector("#choice1-input").setAttribute('checked', 'checked');
+            document.querySelector("#choice1-radio").checked = "checked";
             break;
         case 'choice2':
-            document.querySelector("#choice2-input").setAttribute('checked', 'checked');
+            document.querySelector("#choice2-radio").checked = "checked";
             break;
         case 'choice3':
-            document.querySelector("#choice3-input").setAttribute('checked', 'checked');
+            document.querySelector("#choice3-radio").checked = "checked";
             break;
         case 'choice4':
-            document.querySelector("#choice-input").setAttribute('checked', 'checked');
+            document.querySelector("#choice4-radio").checked = "checked";
             break;
     };
 };
 
 const updateQuestion = async function (event) {
     event.preventDefault();
-    checkAnswer();
+    const questId = document.querySelector(".question-form").getAttribute("questionId");
+    let iD = document.querySelector(".question-form")
+    let putRoute = `/api/questions/update-question/${questId}`
     let postInfo = {
         question: document.querySelector("#question-input").value,
         choice1: document.querySelector("#choice1-input").value,
@@ -29,60 +32,48 @@ const updateQuestion = async function (event) {
         answer: document.querySelector('input[name="correct-answer"]:checked').value,
         quiz_id: iD.getAttribute('quizId')
     }; console.log(postInfo);
-    // await fetch(`/question/${questionID}`, {
-    //     method: 'PUT',
-    //     body: JSON.stringify({
+    await fetch(putRoute, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postInfo)
+    }).then(async (response) => await response.json()).then(function async(data) {
+        location.href = `/question/${questId}`
+    })
+};
+// question.handlebars
+if (document.querySelector("#question-box")) {
+    document
+        .querySelector('#update-question-btn')
+        .addEventListener('click', function () {
+            const questId = document.querySelector("#question-box").getAttribute("questionId")
+            location.href = `/question/update-question/${questId}`
+        });
+};
 
-    //     })
-    // })
-}
+// update-question.handlebars
+if (document.querySelector(".update-qstn-btn")) {
+    checkAnswer();
+    document
+        .querySelector('.update-qstn-btn')
+        .addEventListener('click', updateQuestion);
+};
 
-document
-    .querySelector('#update-question-btn')
-    .addEventListener('click', function() {
-        location.href="/update-question/:id"
+const deleteQuestion = async function (event) {
+    event.preventDefault();
+    const questId = document.querySelector("#question-box").getAttribute("questionId");
+    await fetch(`/api/questions/${questId}`, {
+        method: 'DELETE'
+    }).then(async (response) => await response.json()).then(function async(data) {
+        location.href = `/question`
     });
 
+};
 
-
-// async function updateQuestion(event) {
-//     event.preventDefault();
-//     var questionID = document.querySelector("#question-id").value
-// }
-
-// const postId = document.querySelector('input[name="post-id"]').value;
-
-// const editFormHandler = async function (event) {
-//     event.preventDefault();
-
-//     const title = document.querySelector('input[name="post-title"]').value;
-//     const body = document.querySelector('textarea[name="post-body"]').value;
-
-//     await fetch(`/api/post/${postId}`, {
-//         method: 'PUT',
-//         body: JSON.stringify({
-//             title,
-//             body
-//         }),
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     });
-
-//     document.location.replace('/dashboard');
-// };
-
-// const deleteClickHandler = async function () {
-//     await fetch(`/api/post/${postId}`, {
-//         method: 'DELETE'
-//     });
-
-//     document.location.replace('/dashboard');
-// };
-
-// document
-//     .querySelector('#edit-post-form')
-//     .addEventListener('submit', editFormHandler);
-// document
-//     .querySelector('#delete-btn')
-//     .addEventListener('click', deleteClickHandler);
+// delete 
+if (document.querySelector('#delete-question-btn')) {
+    document
+        .querySelector('#delete-question-btn')
+        .addEventListener('click', deleteQuestion);
+};

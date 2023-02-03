@@ -52,7 +52,7 @@ router.get("/update-question/:id", async (req, res) => {
       answerMatch = 'D';
     }
     question.answerMatch = answerMatch;
-
+    console.log(question);
     res.render("update-question", { question, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
