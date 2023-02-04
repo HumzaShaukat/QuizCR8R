@@ -8,7 +8,6 @@ const updateUserFormHandler = async (event) => {
   const password = document.querySelector('#new-password-update').value.trim();
   const oldPassword = document.querySelector('#old-password-update').value.trim();
 
-  console.log(userId, username, email, password, oldPassword)
   if (username && email && password && oldPassword) {
     // Send a POST request to the API endpoint
     const response = await fetch(`/api/user/update-user/${userId}`, {

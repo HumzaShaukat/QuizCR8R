@@ -1,11 +1,12 @@
-<div id="quizdata-container">
+<div id="quizdata-container" quiz-id="{{quiz.id}}">
   <div class="main-title">
     <h2>{{quiz.quiz_title}}</h2>
+    <h3>Click on the question to edit</h3>
   </div>
   <div class="quiz-questions">
     {{#each quiz.questions}}
     <div class="question-data">
-      <h5>{{question}}</h5>
+      <h5><a href="/question/update-question/{{id}}">{{question}}</a></h5>
       <ul>
         <li data-index="choice1">A&#41 {{choice1}}</li>
         <li data-index="choice2">B&#41 {{choice2}}</li>
@@ -17,7 +18,9 @@
     {{/each}}
   </div>
   <div class="btn-box">
-    <button class="btn" id="delete-quiz-btn">Delete Quiz</button>
-    <button class="btn" id="update-quiz-btn">Update Quiz</button>
+    <button class="btn" id="delete-quiz-btn" >Delete Quiz</button>
+    <button class="btn" id="update-quiz-btn">Update Quiz Title</button>
   </div>
 </div>
+
+<script src="../js/quizdata.js"></script>

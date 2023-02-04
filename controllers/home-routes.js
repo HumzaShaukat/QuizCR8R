@@ -38,7 +38,7 @@ router.get('/profile', async (req, res) => {
     res.render("profile", { quizzes, username, loggedIn: req.session.loggedIn });
     return;
   }
-  res.render('login');
+  res.redirect('/login');
 });
 
 router.get('/update-user', withAuth, async (req, res) => {
@@ -49,7 +49,7 @@ router.get('/update-user', withAuth, async (req, res) => {
     console.log(user)
     return;
   }
-  res.redirect('/login', { loggedIn: req.session.loggedIn });
+  res.redirect('/login');
 });
 
 router.get('/signup', (req, res) => {
