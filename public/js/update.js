@@ -82,10 +82,13 @@ const updateQuiz = async function (event) {
     event.preventDefault();
     const quizId = document.querySelector(".quiz-title-form").getAttribute("quiz-id");
     const quizTitle = document.querySelector('#quiz-title-input').value
+    const quizTime = document.querySelector('#quiz-time-input').value
+    console.log(quizTime)
     let putRoute = `/api/quizzes/${quizId}`
     let quizInfo = {
         id: quizId,
-        quiz_title: quizTitle
+        quiz_title: quizTitle,
+        time: quizTime
     };
     console.log(quizInfo);
     await fetch(putRoute, {

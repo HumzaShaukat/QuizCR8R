@@ -4,8 +4,9 @@ const { QuizList, Question } = require("../../models");
 router.post("/", async (req, res) => {
   try {
     const newQuizList = await QuizList.create({
-      user_id: req.body.user_id,
-      quiz_title: req.body.quiz_title
+      user_id: req.session.user_id,
+      quiz_title: req.body.quiz_title,
+      time: req.body.time*60
     });
     res.status(200).json(newQuizList.id);
   } catch (err) {
@@ -18,6 +19,7 @@ router.put("/:id", async (req, res) => {
     const updateQuizList = QuizList.update(
       {
         quiz_title: req.body.quiz_title,
+        time: parseInt(req.body.time*60)
       },
       {
         where: {
