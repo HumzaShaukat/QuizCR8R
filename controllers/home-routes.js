@@ -26,6 +26,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/profile', async (req, res) => {
+  console.log(req.session)
   if (req.session.loggedIn) {
     const quizData = await QuizList.findAll({
       where: {
@@ -40,7 +41,7 @@ router.get('/profile', async (req, res) => {
   res.render('login');
 });
 
-router.get('/update-user', async (req, res) => {
+router.get('/update-user', withAuth, async (req, res) => {
   if (req.session.loggedIn) {
     const userData = await User.findByPk(req.session.user_id);
     const user = userData.get({ plain: true });
@@ -48,7 +49,7 @@ router.get('/update-user', async (req, res) => {
     console.log(user)
     return;
   }
-  res.render('login', { loggedIn: req.session.loggedIn });
+  res.redirect('/login', { loggedIn: req.session.loggedIn });
 });
 
 router.get('/signup', (req, res) => {
