@@ -1,20 +1,24 @@
 const router = require("express").Router();
 const withAuth = require('../utils/auth')
-const { User, QuizList } = require('../models');
+const { User, QuizList, Question } = require('../models');
 
-router.get('/', async (req, res) => {
-  if (req.session.loggedIn) {
-    try {
-      // const quizData = await QuizList.findAll({ include: User });
-      // const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
-      // const username = req.session.username
-      res.redirect('/profile');
-    } catch (err) {
-      res.status(500).json(err);
+router.get('/:id', withAuth, async (req, res) => {
+  try {
+    const quizData = await QuizList.findByPk(req.params.id, {
+      include: Question,
+    });
+    const quiz = quizData.get({ plain: true });
+    console.log(quiz.questions.length)
+
+    if (!quizData) {
+      res.status(400).json({ message: "Quiz Not Found" });
+      return;
     }
-    return;
+    res.render("take-quiz", { quiz, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.render('login');
+  return;
 });
 
 router.get('/login', (req, res) => {

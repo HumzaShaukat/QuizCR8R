@@ -5,15 +5,14 @@ const updateUserFormHandler = async (event) => {
   const userId = document.querySelector('#update-user-box').getAttribute('user-id');
   const username = document.querySelector('#username-update').value.trim();
   const email = document.querySelector('#email-update').value.trim();
-  const newPassword = document.querySelector('#new-password-update').value.trim();
+  const password = document.querySelector('#new-password-update').value.trim();
   const oldPassword = document.querySelector('#old-password-update').value.trim();
 
-  console.log(userId, username, email, newPassword, oldPassword)
-  if (username && email && newPassword && oldPassword) {
+  if (username && email && password && oldPassword) {
     // Send a POST request to the API endpoint
     const response = await fetch(`/api/user/update-user/${userId}`, {
       method: 'PUT',
-      body: JSON.stringify({ userId, username, email, newPassword, oldPassword }),
+      body: JSON.stringify({ userId, username, email, password, oldPassword }),
       headers: { 'Content-Type': 'application/json' },
     });
 

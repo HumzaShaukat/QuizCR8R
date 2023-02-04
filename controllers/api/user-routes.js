@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const withAuth = require('../../utils/auth');
+var bcrypt = require("bcrypt");
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -77,61 +79,58 @@ router.post('/logout', (req, res) => {
 });
 
 // Update
-// router.put('/update-user/:id', async (req, res) => {
-//   try {
-//     if (req.session.loggedIn) {
-//       const dbUserData = await User.findOne({
-//         where: {
-//           id: req.session.user_id,
-//         },
-//       });
-//       console.log('---------------------------------------------------------------------')
-//       console.log(dbUserData)
-//       if (!dbUserData) {
-//         res
-//           .status(400)
-//           .json({ message: 'Incorrect user info. Please try again!' });
-//         return;
-//       }
+router.put('/update-user/:id', withAuth, async (req, res) => {
+  try {
+    const dbUserData = await User.findOne({
+      where: {
+        id: req.session.user_id,
+      },
+    });
+    console.log('---------------------------------------------------------------------')
+    console.log(dbUserData.get({ plain: true }))
+    if (!dbUserData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect user info. Please try again!' });
+      return;
+    }
 
-//       const validPassword = await dbUserData.checkPassword(req.body.oldPassword);
-//       console.log('++++++++++++++++++++++++++++++++++++++++++++++++')
-//       console.log(validPassword)
-//       if (!validPassword) {
-//         res
-//           .status(400)
-//           .json({ message: 'Incorrect email or password. Please try again!' });
-//         return;
-//       }
-//       const newDbUserData = await User.update(req.body, {
-//         where: {
-//           id: req.params.id,
-//         },
-//       });
-//       console.log('________________________________________________________________')
-//       console.log(newDbUserData)
+    const validPassword = await dbUserData.checkPassword(req.body.oldPassword);
+    console.log('++++++++++++++++++++++++++++++++++++++++++++++++')
+    console.log(validPassword)
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password. Please try again!' });
+      return;
+    }
+    const updateUserData = await User.update(req.body, { where: { id: req.session.user_id }, individualHooks: true });
+    console.log('________________________________________________________________')
 
-//       if (newDbUserData) {
-//         req.session.save(() => {
-//           req.session.loggedIn = true;
-//           req.session.username = newDbUserData.username;
-//           req.session.email = newDbUserData.email;
-//           req.session.user_id = newDbUserData.id
-    
-//           res
-//             .status(200)
-//             .json({ user: newdbUserData, message: 'You have updated your profile!' })
-//         });
-//         console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-//         console.log(req.session)
-//       } else {
-//         res.status(404).end();
-//       }
-//     } else {
-//       res.redirect('/login')
-//     }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// })
+    const newDbUserData = await User.findOne({
+      where: {
+        id: req.session.user_id,
+      },
+    });
+
+    console.log(newDbUserData)
+    if (updateUserData[0] > 0) {
+      req.session.save(() => {
+        req.session.username = req.body.username;
+        req.session.email = req.body.email;
+        console.log('########################################')
+        res
+          .status(200)
+          .json({ newDbUserData, message: 'Profile updated' })
+          .end()
+      });
+      console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+      console.log(req.session)
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 module.exports = router;
