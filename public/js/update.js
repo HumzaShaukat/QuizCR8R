@@ -77,3 +77,31 @@ if (document.querySelector('#delete-question-btn')) {
         .querySelector('#delete-question-btn')
         .addEventListener('click', deleteQuestion);
 };
+
+const updateQuiz = async function (event) {
+    event.preventDefault();
+    const quizId = document.querySelector(".quiz-title-form").getAttribute("quiz-id");
+    const quizTitle = document.querySelector('#quiz-title-input').value
+    let putRoute = `/api/quizzes/${quizId}`
+    let quizInfo = {
+        id: quizId,
+        quiz_title: quizTitle
+    };
+    console.log(quizInfo);
+    await fetch(putRoute, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(quizInfo)
+    }).then(async (response) => await response.json()).then(function async(data) {
+        location.href = `/quizzes/${quizId}`
+    })
+};
+
+
+if (document.querySelector('#update-quiz-btn')) {
+    document
+        .querySelector('#update-quiz-btn')
+        .addEventListener('click', updateQuiz);
+};
