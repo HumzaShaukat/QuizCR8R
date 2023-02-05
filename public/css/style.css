@@ -1,11 +1,12 @@
 body {
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(black, rgb(80, 0, 80));
+    /* background-image: linear-gradient(black, rgb(80, 0, 80)); */
+    background-color: #e8e7e7;
     background-attachment: fixed;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: whitesmoke;
-    margin: 2.5px;
+    color: black;
+    /* margin: 2.5px; */
 }
 
 header {
@@ -16,6 +17,7 @@ header {
     color: navy;
     padding: 5px;
     margin-bottom: 5px;
+    height: 20vh;
 }
 
 main {
@@ -37,7 +39,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 5px;
     width: 40%;
 }
@@ -139,7 +141,7 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 8px;
     width: 70%;
     padding: 5px;
@@ -152,7 +154,7 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 8px;
     width: 70%;
     padding: 5px;
@@ -171,13 +173,13 @@ h3 {
 .question-link {
     margin: 5px;
     font-weight: 700;
-    color: whitesmoke;
+    color: black;
 }
 
 .quiz-link {
     margin: 5px;
     font-weight: 700;
-    color: whitesmoke;
+    color: black;
 }
 
 .question-link:hover,
@@ -209,7 +211,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 8px;
     width: 70%;
     padding: 5px;
@@ -220,7 +222,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 8px;
     width: 70%;
     padding: 5px;
@@ -234,7 +236,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 8px;
     width: 60%;
     padding: 5px;
@@ -264,7 +266,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 8px;
     width: 95%;
     padding: 5px;
@@ -280,7 +282,7 @@ li {
     align-items: center;
     padding: 5.8px 10.8px;
     margin-left: 10px;
-    border: .8px transparent whitesmoke;
+    border: .8px transparent black;
 }
 
 .choices {
@@ -331,7 +333,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 8px;
     width: 40%;
     padding: 5px;
@@ -349,7 +351,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid whitesmoke;
+    border: 1px solid black;
     border-radius: 8px;
     width: 70%;
     padding: 5px;
