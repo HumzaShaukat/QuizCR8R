@@ -1,4 +1,3 @@
-// const quizID = document.querySelector('')
 const checkAnswer = function () {
     let correctAnswer = document.querySelector(".question-form").getAttribute("correctAnswer");
     console.log(correctAnswer);
@@ -17,7 +16,7 @@ const checkAnswer = function () {
             break;
     };
 };
-
+// question.handlebars
 const updateQuestion = async function (event) {
     event.preventDefault();
     const questId = document.querySelector(".question-form").getAttribute("questionId");
@@ -39,9 +38,10 @@ const updateQuestion = async function (event) {
         },
         body: JSON.stringify(postInfo)
     }).then(async (response) => await response.json()).then(function async(data) {
-        location.href = `/question/${questId}`
+        location.href = `/quizzes/${iD.getAttribute('quizId')}`
     })
 };
+
 // question.handlebars
 if (document.querySelector("#question-box")) {
     document
@@ -62,7 +62,7 @@ if (document.querySelector(".update-qstn-btn")) {
 
 const deleteQuestion = async function () {
     const questId = document.querySelector("#question-box").getAttribute("questionId");
-    const quizID = document.querySelector('#question-box').getAttribute('quiz-id');
+    const quizID = document.querySelector('#question-box').getAttribute('quizId');
     await fetch(`/api/questions/${questId}`, {
         method: 'DELETE'
     }).then(async (response) => await response.json()).then(function async(data) {
@@ -70,16 +70,33 @@ const deleteQuestion = async function () {
     });
 };
 
-// delete 
+const deleteQuestion2 = async function () {
+    const questId = document.querySelector(".question-form").getAttribute("questionId");
+    const quizID = document.querySelector('.question-form').getAttribute('quizId');
+    await fetch(`/api/questions/${questId}`, {
+        method: 'DELETE'
+    }).then(async (response) => await response.json()).then(function async(data) {
+        location.href = `/quizzes/${quizID}`
+    });
+};
+
+// delete question.handlebars
 if (document.querySelector('#delete-question-btn')) {
     document
         .querySelector('#delete-question-btn')
         .addEventListener('click', deleteQuestion);
 };
 
+// delete update-question.handlebars
+if (document.querySelector('.delete-question-btn')) {
+    document
+        .querySelector('.delete-question-btn')
+        .addEventListener('click', deleteQuestion2);
+};
+
 const updateQuiz = async function (event) {
     event.preventDefault();
-    const quizId = document.querySelector(".quiz-title-form").getAttribute("quiz-id");
+    const quizId = document.querySelector(".quiz-title-form").getAttribute("quizId");
     const quizTitle = document.querySelector('#quiz-title-input').value
     const quizTime = document.querySelector('#quiz-time-input').value
     console.log(quizTime)
