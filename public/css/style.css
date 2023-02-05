@@ -377,7 +377,6 @@ li {
 .form-btn-box {
     display: flex;
     justify-content: center;
-    margin-right: ;
 }
 
 footer {
@@ -493,7 +492,7 @@ aside {
     padding: 5px;
     font-size: 1.2em;
     font-weight: 700;
-    color: whitesmoke;
+    color: black;
 }
 
 .update-question-form {
@@ -502,4 +501,59 @@ aside {
 
 #signup-link-box {
     margin: 10px;
+}
+
+@media screen and (max-width: 768px) {
+ .btn-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#quizdata-container h2 {
+    padding-top: 1vh;
+}
+
+#quizdata-container h3 {
+    font-size: 100%;
+}
+
+#user-scores-container{
+    width: 70vw;
+    overflow-y: scroll;
+    height: 50vh;
+}
+
+#update-user-box {
+    width: 80vw;
+}
+
+#main-quiz-section {
+    flex-direction: column;
+}
+
+aside {
+    flex-direction: row;
+    height: 10vh;
+}
+
+#timer-box {
+    border: none;
+    margin-right: 5vw;
+}
+
+#score-box {
+    border: none;
+    margin-right: 5vw;
+}
+
+#message-box {
+    border: none;
+    margin-right: 5vw;
+}
+
+#main-box {
+    height: 49vh;
+    width: 98vw;
+}
+
 }
