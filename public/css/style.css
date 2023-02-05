@@ -345,6 +345,10 @@ footer {
     padding: 5px;
 }
 
+#main-quiz-section {
+    display: flex;
+}
+
 .hidden {
     display: none !important;
 }

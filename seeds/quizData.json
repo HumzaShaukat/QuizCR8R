@@ -1,10 +1,12 @@
 [
   {
     "user_id": 2,
-    "quiz_title": "Advanced Couchsurfing"
+    "quiz_title": "Advanced Couchsurfing",
+    "time": "600"
   },
   {
     "user_id": 1,
-    "quiz_title": "What does a Spider do?"
+    "quiz_title": "What does a Spider do?",
+    "time": "2400"
   }
 ]
