@@ -1,4 +1,5 @@
-async function deleteQuiz() {
+async function deleteQuiz(event) {
+  let target = event.target;
   const ID = document
     .querySelector("#quizdata-container")
     .getAttribute("quizID");
@@ -13,4 +14,4 @@ async function deleteQuiz() {
 
 document
   .querySelector("#delete-quiz-btn")
-  .addEventListener("click", deleteQuiz());
+  .addEventListener("click", deleteQuiz(event));
