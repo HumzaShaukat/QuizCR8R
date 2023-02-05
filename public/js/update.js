@@ -60,15 +60,14 @@ if (document.querySelector(".update-qstn-btn")) {
         .addEventListener('click', updateQuestion);
 };
 
-const deleteQuestion = async function (event) {
-    event.preventDefault();
+const deleteQuestion = async function () {
     const questId = document.querySelector("#question-box").getAttribute("questionId");
+    const quizID = document.querySelector('#question-box').getAttribute('quiz-id');
     await fetch(`/api/questions/${questId}`, {
         method: 'DELETE'
     }).then(async (response) => await response.json()).then(function async(data) {
-        location.href = `/question`
+        location.href = `/quizzes/${quizID}`
     });
-
 };
 
 // delete 

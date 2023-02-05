@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { QuizList, Question, Score, User } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findAll();
     const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
@@ -12,13 +12,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id, {
       include: Question,
     });
     const quiz = quizData.get({ plain: true });
-    console.log(quiz)
     for (var i = 0; i < quiz.questions.length; i++) {
       let answerMatch;
       if (quiz.questions[i].answer === Object.keys(quiz.questions[0])[2]) {
@@ -48,7 +47,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get('/update-quiz/:id', async (req, res) => {
+router.get('/update-quiz/:id', withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id);
     if (!quizData) {
@@ -56,7 +55,6 @@ router.get('/update-quiz/:id', async (req, res) => {
       return;
     }
     const quiz = quizData.get({ plain: true });
-    console.log(quiz)
     quizMin = quiz.time/60
     res.render("update-quiz-title", { quizMin, quiz, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -64,7 +62,7 @@ router.get('/update-quiz/:id', async (req, res) => {
   }
 });
 
-router.get('/scores/:id', async (req, res) => {
+router.get('/scores/:id', withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id);
     const quizInfo = quizData.get({ plain: true })
@@ -91,11 +89,6 @@ router.get('/scores/:id', async (req, res) => {
       return;
     }
     const score = scoreData.map((score) => score.get({ plain: true }));
-    console.log(score)
-    console.log(quizInfo)
-    console.log(score[0].quiz_list.quiz_title)
-    console.log(score[0].user.username)
-    console.log(score[0].score)
     res.render("quiz-scores", { quizInfo, score, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);

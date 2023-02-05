@@ -1,25 +1,17 @@
 const router = require("express").Router();
 const { Question, QuizList } = require("../../models");
+const withAuth = require('../../utils/auth')
 
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
-    const newQuestion = await Question.create({
-      ...req.body,
-      // question: req.body.question,
-      // choice1: req.body.choice1,
-      // choice2: req.body.choice2,
-      // choice3: req.body.choice3,
-      // choice4: req.body.choice4,
-      // answer: req.body.answer,
-      // quiz_id: req.body.quiz_id,
-    });
+    const newQuestion = await Question.create({ ...req.body });
     res.status(200).json(newQuestion)
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.put("/update-question/:id", async (req, res) => {
+router.put("/update-question/:id", withAuth, async (req, res) => {
   try {
     const updateQuestion = Question.update(
       {
@@ -47,19 +39,13 @@ router.put("/update-question/:id", async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
-    const questionData = await Question.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-
+    const questionData = await Question.destroy({ where: { id: req.params.id } });
     if (!questionData) {
       res.status(404).json({ message: 'No question found with this id!' });
       return;
     }
-
     res.status(200).json(questionData);
   } catch (err) {
     res.status(500).json(err);
