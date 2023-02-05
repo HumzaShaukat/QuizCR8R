@@ -4,9 +4,8 @@ const { Score } = require('../../models/');
 
 router.post('/', withAuth, async (req, res) => {
   try {
-    const scoreData = await Score.create( {...req.body, user_id: req.session.user_id});
-    console.log(scoreData)
-       if (!scoreData) {
+    const scoreData = await Score.create({ ...req.body, user_id: req.session.user_id });
+    if (!scoreData) {
       res.status(400).json({ message: "Score not saved" });
       return;
     }

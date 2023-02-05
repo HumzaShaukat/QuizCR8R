@@ -29,12 +29,7 @@ router.post('/', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
-    const dbUserData = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
-    });
-
+    const dbUserData = await User.findOne({ where: { email: req.body.email } });
     if (!dbUserData) {
       res
         .status(400)
@@ -81,13 +76,7 @@ router.post('/logout', (req, res) => {
 // Update
 router.put('/update-user/:id', withAuth, async (req, res) => {
   try {
-    const dbUserData = await User.findOne({
-      where: {
-        id: req.session.user_id,
-      },
-    });
-    console.log('---------------------------------------------------------------------')
-    console.log(dbUserData.get({ plain: true }))
+    const dbUserData = await User.findOne({ where: { id: req.session.user_id } });
     if (!dbUserData) {
       res
         .status(400)
@@ -96,8 +85,6 @@ router.put('/update-user/:id', withAuth, async (req, res) => {
     }
 
     const validPassword = await dbUserData.checkPassword(req.body.oldPassword);
-    console.log('++++++++++++++++++++++++++++++++++++++++++++++++')
-    console.log(validPassword)
     if (!validPassword) {
       res
         .status(400)
@@ -105,27 +92,18 @@ router.put('/update-user/:id', withAuth, async (req, res) => {
       return;
     }
     const updateUserData = await User.update(req.body, { where: { id: req.session.user_id }, individualHooks: true });
-    console.log('________________________________________________________________')
 
-    const newDbUserData = await User.findOne({
-      where: {
-        id: req.session.user_id,
-      },
-    });
+    const newDbUserData = await User.findOne({ where: { id: req.session.user_id } });
 
-    console.log(newDbUserData)
     if (updateUserData[0] > 0) {
       req.session.save(() => {
         req.session.username = req.body.username;
         req.session.email = req.body.email;
-        console.log('########################################')
         res
           .status(200)
           .json({ newDbUserData, message: 'Profile updated' })
           .end()
       });
-      console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-      console.log(req.session)
     } else {
       res.status(404).end();
     }

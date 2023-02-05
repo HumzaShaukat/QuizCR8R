@@ -60,15 +60,14 @@ if (document.querySelector(".update-qstn-btn")) {
         .addEventListener('click', updateQuestion);
 };
 
-const deleteQuestion = async function (event) {
-    event.preventDefault();
+const deleteQuestion = async function () {
     const questId = document.querySelector("#question-box").getAttribute("questionId");
+    const quizID = document.querySelector('#question-box').getAttribute('quiz-id');
     await fetch(`/api/questions/${questId}`, {
         method: 'DELETE'
     }).then(async (response) => await response.json()).then(function async(data) {
-        location.href = `/question`
+        location.href = `/quizzes/${quizID}`
     });
-
 };
 
 // delete 
@@ -82,10 +81,13 @@ const updateQuiz = async function (event) {
     event.preventDefault();
     const quizId = document.querySelector(".quiz-title-form").getAttribute("quiz-id");
     const quizTitle = document.querySelector('#quiz-title-input').value
+    const quizTime = document.querySelector('#quiz-time-input').value
+    console.log(quizTime)
     let putRoute = `/api/quizzes/${quizId}`
     let quizInfo = {
         id: quizId,
-        quiz_title: quizTitle
+        quiz_title: quizTitle,
+        time: quizTime
     };
     console.log(quizInfo);
     await fetch(putRoute, {
