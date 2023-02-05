@@ -1,27 +1,28 @@
-<form class="question-form" quizId ="{{question.quiz_id}}" questionId = "{{question.id}}" correctAnswer = "{{question.answer}}">
+<form class="question-form" quizId="{{question.quiz_id}}" questionId="{{question.id}}"
+    correctAnswer="{{question.answer}}">
     <div class="form-line">
         <label class="question-label" for="question-input">Question:</label>
         <input class="form-input" type="text" id="question-input" value="{{question.question}}" />
     </div>
     <div class="form-line">
-        <label  class="question-label"for="choice1-input">Choice 1:</label>
-        <input class="form-input" type="text" id="choice1-input" value="{{question.choice1}}"/>
+        <label class="question-label" for="choice1-input">Choice 1:</label>
+        <input class="form-input" type="text" id="choice1-input" value="{{question.choice1}}" />
     </div>
     <div class="form-line">
-        <label  class="question-label"for="choice2-input">Choice 2:</label>
-        <input class="form-input" type="text" id="choice2-input" value="{{question.choice2}}"/>
+        <label class="question-label" for="choice2-input">Choice 2:</label>
+        <input class="form-input" type="text" id="choice2-input" value="{{question.choice2}}" />
     </div>
     <div class="form-line">
-        <label  class="question-label"for="choice3-input">Choice 3:</label>
+        <label class="question-label" for="choice3-input">Choice 3:</label>
         <input class="form-input" type="text" id="choice3-input" value="{{question.choice3}}" />
     </div>
     <div class="form-line">
-        <label  class="question-label"for="choice4-input">Choice 4:</label>
+        <label class="question-label" for="choice4-input">Choice 4:</label>
         <input class="form-input" type="text" id="choice4-input" value="{{question.choice4}}" />
     </div>
     <div class="choices">
         <div class="select-answer">
-            Answer: 
+            Answer:
         </div>
         <div id="radio-box">
             <div class="radio-choices">
@@ -30,22 +31,20 @@
             </div>
             <div class="radio-choices">
                 <label for="choice2-radio">Choice 2: </label>
-                <input type="radio" id="choice2-radio" name="correct-answer" value="choice2"
-                    class="radio">
+                <input type="radio" id="choice2-radio" name="correct-answer" value="choice2" class="radio">
             </div>
             <div class="radio-choices">
                 <label for="choice3-radio">Choice 3: </label>
-                <input type="radio" id="choice3-radio" name="correct-answer" value="choice3"
-                    class="radio">
+                <input type="radio" id="choice3-radio" name="correct-answer" value="choice3" class="radio">
             </div>
             <div class="radio-choices">
                 <label for="choice4-radio">Choice 4: </label>
-                <input type="radio" id="choice4-radio" name="correct-answer" value="choice4"
-                    class="radio">
+                <input type="radio" id="choice4-radio" name="correct-answer" value="choice4" class="radio">
             </div>
         </div>
     </div>
     <div>
+        <button class="btn" id="delete-question-btn">Delete Question</button>
         <button class="update-qstn-btn btn">Update Question</button>
     </div>
 </form>

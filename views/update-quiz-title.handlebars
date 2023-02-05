@@ -1,15 +1,15 @@
 <form class="quiz-title-form" quiz-id={{quiz.id}}>
     <div class="form-line">
-        <label for="quiz-title-input">Quiz Title:</label>
+        <label for="quiz-title-input" class="form-category">Quiz Title:</label>
         <input class="form-input" type="text" id="quiz-title-input" placeholder="What is the title of your quiz?"
             value="{{quiz.quiz_title}}" />
     </div>
     <div class="form-line">
-        <label for="quiz-time-input">Time Limit in Minutes:</label>
+        <label for="quiz-time-input" class="form-category">Time Limit in Minutes:</label>
         <input class="form-input" type="text" id="quiz-time-input" placeholder="How many minutes?"  value="{{quizMin}}"/>
     </div>
 
-    <div class="form-line">
+    <div class="form-line form-btn-box">
         <button class="btn" id="update-quiz-btn">Update Quiz Title</button>
     </div>
 </form>
