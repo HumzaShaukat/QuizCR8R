@@ -13,8 +13,8 @@ function nextQuestion(){
 async function postQuiz(event) {
     event.preventDefault();
     const quizTitle = await {
-        user_id: 1,
-        quiz_title:  document.querySelector("#quiz-title-input").value
+        quiz_title:  document.querySelector("#quiz-title-input").value,
+        time:  60 * document.querySelector("#quiz-time-input").value
     }
   fetch("/api/quizzes", {
     method: "POST",

@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const { Question, QuizList } = require("../models");
+const withAuth = require('../utils/auth')
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
-    const questionData = await Question.findAll();
+    const questionData = await Question.findAll({ where: { user_id: req.session.user_id } });
     const questions = questionData.map((question) => question.get({ plain: true }))
     res.render("questions", { questions, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -11,13 +12,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", withAuth, async (req, res) => {
   try {
     const questionData = await Question.findByPk(req.params.id, {
       include: QuizList
     });
     const question = questionData.get({ plain: true });
-    console.log(question)
     if (question.answer === Object.keys(question)[2]) {
       answerMatch = 'A';
     } else if (question.answer === Object.keys(question)[3]) {
@@ -28,14 +28,14 @@ router.get("/:id", async (req, res) => {
       answerMatch = 'D';
     }
     question.answerMatch = answerMatch;
-
+    console.log(question)
     res.render("question", { question, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
 })
 
-router.get("/update-question/:id", async (req, res) => {
+router.get("/update-question/:id", withAuth, async (req, res) => {
   try {
     const questionData = await Question.findByPk(req.params.id, {
       include: QuizList
@@ -52,7 +52,6 @@ router.get("/update-question/:id", async (req, res) => {
       answerMatch = 'D';
     }
     question.answerMatch = answerMatch;
-    console.log(question);
     res.render("update-question", { question, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);

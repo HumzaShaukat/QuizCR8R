@@ -1,0 +1,13 @@
+<div id="quiz-scores-container" quiz-id="{{quizInfo.id}}">
+  <div class="main-title">
+    <h2>{{quizInfo.quiz_title}}</h2>
+    <h3>SCORES</h3>
+  </div>
+  <ul id="quiz-scores-list">
+    {{#each score}}
+    <li class="scores">{{user.username}} - {{score}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+<script src="../../js/quizscores.js"></script>
