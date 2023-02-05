@@ -12,13 +12,15 @@
       <h5 id="message-text"></h5>
     </div>
   </aside>
-  <div >
+  <div id="main-box">
     <div id="takequiz-container" quiz-id="{{quiz.id}}">
       <div class="main-title">
         <h2 id="quiz-title">{{quiz.quiz_title}}</h2>
       </div>
       <div id="quiz-question-box">
-        <h5 id="quiz-question">{{question}}</h5>
+        <div id="quiz-question-title">
+          <h5 id="quiz-question">{{question}}</h5>
+        </div>
         <ul id="answer-choice-list">
           <li id="choice1" data-index="choice1">A&#41 <span id="choice1-text" correct-answer=false></span></li>
           <li id="choice2" data-index="choice2">B&#41 <span id="choice2-text" correct-answer=false></span></li>

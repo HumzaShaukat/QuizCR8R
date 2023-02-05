@@ -16,18 +16,25 @@ let numQuest = 0;
 let userCorrect = 0;
 let userScore = 0;
 const endQuizBox = document.querySelector("#end-quiz-box");
-const timerText = document.querySelector("#timer-text");
 const scoreText = document.querySelector("#score-text");
+const timerText = document.querySelector("#timer-text");
 const messageText = document.querySelector("#message-text");
 let quizTime = 0;
 const finalScore = document.querySelector("#final-score");
+
+// const clearMessage = setTimeout(function () {
+//   messageText.innerHTML = "";
+// }, 2000);
 
 const getQuiz = async () => {
   takeQuizContainer.classList.remove("hidden");
   endQuizBox.classList.add("hidden");
   scoreText.textContent = "0 %";
   messageText.textContent = "Good Luck!";
-  clearMessage;
+  // clearMessage;
+  setTimeout(function () {
+    messageText.innerHTML = "";
+  }, 2000);
   await fetch(`/api/take-quiz/${quizID}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -45,10 +52,6 @@ const getQuiz = async () => {
   startTimer();
   renderQuestion();
 };
-
-const clearMessage = setTimeout(function () {
-  messageText.textContent = "";
-}, 2000);
 
 function startTimer() {
   timer = setInterval(function () {
@@ -89,7 +92,7 @@ const saveScore = async () => {
 };
 
 const endQuiz = async () => {
-  finalScore.textContent = userScore;
+  finalScore.textContent = `${userScore} %`;
   quizTime = 0;
   saveScore();
   takeQuizContainer.classList.add("hidden");
@@ -110,10 +113,16 @@ choiceList.addEventListener("click", async (event) => {
       console.log(`userCorrect\n${userCorrect}`);
       scoreText.textContent = `${userScore} %`;
       messageText.textContent = "CORRECT!";
-      clearMessage;
+      // clearMessage;
+      setTimeout(function () {
+        messageText.innerHTML = "";
+      }, 2000);
     } else {
       messageText.textContent = "wrong!";
-      clearMessage;
+      // clearMessage;
+      setTimeout(function () {
+        messageText.innerHTML = "";
+      }, 2000);
     }
     element.setAttribute("correct-answer", "false");
 
