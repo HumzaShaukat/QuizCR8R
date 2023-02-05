@@ -372,3 +372,19 @@ footer {
 #home-btn:active {
     text-decoration: none;
 }
+
+#main-quiz-section {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+aside {
+    float: left;
+    width: 30vw;
+    margin-left: 1vw;
+}
+
+#takequiz-container {
+    margin-left: 13.5vw;
+}
