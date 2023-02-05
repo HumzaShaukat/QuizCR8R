@@ -503,7 +503,21 @@ aside {
     margin: 10px;
 }
 
+
+/* styling for responsive design */
 @media screen and (max-width: 768px) {
+
+ #signup-box {
+    width: 80vw;
+ }
+ #login-box {
+    width: 80vw;
+ }
+
+ .main-title {
+    text-align: center;
+ }
+
  .btn-box {
     display: flex;
     flex-wrap: wrap;
