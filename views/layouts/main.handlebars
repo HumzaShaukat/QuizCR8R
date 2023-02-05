@@ -12,13 +12,17 @@
 <body>
   <header>
     <h1>
-      <a id ="home-btn" href = "/">
-      Quiz Cr8r
+      <a id="home-btn" href="/">
+        Quiz Cr8r
       </a>
     </h1>
     {{#if loggedIn}}
     <nav>
       <button class="no-button" id="logout">logout</button>
+    </nav>
+    {{else}}
+    <nav>
+      <button class="no-button" id="login" onclick="window.location.href='/login';">login</button>
     </nav>
     {{/if}}
   </header>
@@ -31,8 +35,8 @@
 
 </body>
 <script src="/js/jass.js"></script>
-  {{#if loggedIn}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
+{{#if loggedIn}}
+<script src="/js/logout.js"></script>
+{{/if}}
 
 </html>
