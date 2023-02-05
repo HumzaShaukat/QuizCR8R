@@ -47,7 +47,7 @@ router.get("/:id", withAuth, async (req, res) => {
   }
 });
 
-router.get('/update-quiz/:id', withAuth, async (req, res) => {
+router.get("/update-quiz/:id", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id);
     if (!quizData) {
@@ -55,41 +55,49 @@ router.get('/update-quiz/:id', withAuth, async (req, res) => {
       return;
     }
     const quiz = quizData.get({ plain: true });
-    quizMin = quiz.time/60
-    res.render("update-quiz-title", { quizMin, quiz, loggedIn: req.session.loggedIn });
+    quizMin = quiz.time / 60;
+    res.render("update-quiz-title", {
+      quizMin,
+      quiz,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/scores/:id', withAuth, async (req, res) => {
+router.get("/scores/:id", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id);
-    const quizInfo = quizData.get({ plain: true })
+    const quizInfo = quizData.get({ plain: true });
 
     const scoreData = await Score.findAll({
       where: {
-        quiz_id: req.params.id
+        quiz_id: req.params.id,
       },
-      order: [
-        ['score', 'DESC']
+      order: [["score", "DESC"]],
+      include: [
+        {
+          model: User,
+          attributes: ["username"],
+        },
+        {
+          model: QuizList,
+          attributes: ["quiz_title"],
+        },
       ],
-      include: [{
-        model: User,
-        attributes: ['username']
-      },
-      {
-        model: QuizList,
-        attributes: ['quiz_title']
-      }],
-      attributes: ['score']
+      attributes: ["score"],
     });
     if (!scoreData) {
       res.status(400).json({ message: "Quiz Not Found" });
       return;
     }
     const score = scoreData.map((score) => score.get({ plain: true }));
-    res.render("quiz-scores", { quizInfo, score, loggedIn: req.session.loggedIn });
+    res.render("quiz-scores", {
+      quizInfo,
+      score,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
