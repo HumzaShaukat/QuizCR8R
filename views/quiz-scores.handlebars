@@ -5,12 +5,13 @@
   </div>
   <ul id="quiz-scores-list">
     {{#each score}}
-    <li class="quiz-scores">{{user.username}} - {{score}}</li>
+    <li class="quiz-scores aos-animate" data-aos="fade-right" >{{user.username}} - {{score}}</li>
     {{/each}}
   </ul>
 </div>
 
 <script src="../../js/quizscores.js"></script>
+{{!-- code to integrate aos --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script> 
 <script>
   if( (window.innerWidth || document.documentElement.clientWidth) > 768) {
