@@ -18,6 +18,7 @@
     "url": "https://github.com/HumzaShaukat/QuizCR8R/issues"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "bcrypt": "^5.0.0",
     "connect-session-sequelize": "^7.0.4",
     "dotenv": "^8.2.0",
