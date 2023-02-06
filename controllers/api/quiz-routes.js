@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const { QuizList, Question } = require("../../models");
-const withAuth = require('../../utils/auth')
+const router = require('express').Router();
+const { QuizList, Question } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // route to create a quiz
-router.post("/", withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const newQuizList = await QuizList.create({
       user_id: req.session.user_id,
@@ -17,7 +17,7 @@ router.post("/", withAuth, async (req, res) => {
 });
 
 // route to update the title/name
-router.put("/:id", withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const updateQuizList = QuizList.update(
       {
@@ -31,10 +31,10 @@ router.put("/:id", withAuth, async (req, res) => {
       }
     );
     if (!updateQuizList) {
-      res.status(400).json({ message: "No quiz with that ID exists!" });
+      res.status(400).json({ message: 'No quiz with that ID exists!' });
       return;
     }
-    res.status(200).json({ message: "Quiz Name updated successfully!" });
+    res.status(200).json({ message: 'Quiz Name updated successfully!' });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -87,11 +87,11 @@ router.put("/:id", withAuth, async (req, res) => {
 //temp comment
 
 // route to delete a quiz
-router.delete("/:id", withAuth, async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.destroy({ where: { id: req.params.id } });
     if (!quizData) {
-      res.status(400).json({ message: "No quiz found!" });
+      res.status(400).json({ message: 'No quiz found!' });
       return;
     }
     res.status(200).json(quizData);

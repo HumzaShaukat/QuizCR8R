@@ -1,5 +1,5 @@
-const router = require("express").Router();
-const withAuth = require('../../utils/auth')
+const router = require('express').Router();
+const withAuth = require('../../utils/auth');
 const { User, QuizList, Question } = require('../../models');
 
 router.get('/:id', withAuth, async (req, res) => {
@@ -8,10 +8,10 @@ router.get('/:id', withAuth, async (req, res) => {
       include: Question,
     });
     const quiz = quizData.get({ plain: true });
-    console.log(quiz)
+    console.log(quiz);
 
     if (!quizData) {
-      res.status(400).json({ message: "Quiz Not Found" });
+      res.status(400).json({ message: 'Quiz Not Found' });
       return;
     }
     res.status(200).json({ quiz });

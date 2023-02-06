@@ -1,12 +1,12 @@
-const router = require("express").Router();
-const withAuth = require('../../utils/auth')
+const router = require('express').Router();
+const withAuth = require('../../utils/auth');
 const { Score } = require('../../models/');
 
 router.post('/', withAuth, async (req, res) => {
   try {
     const scoreData = await Score.create({ ...req.body, user_id: req.session.user_id });
     if (!scoreData) {
-      res.status(400).json({ message: "Score not saved" });
+      res.status(400).json({ message: 'Score not saved' });
       return;
     }
     res.status(200).json({ scoreData });

@@ -1,19 +1,19 @@
-const router = require("express").Router();
-const { Question, QuizList } = require("../../models");
-const withAuth = require('../../utils/auth')
+const router = require('express').Router();
+const { Question, QuizList } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // route to create a new question
 router.post('/', withAuth, async (req, res) => {
   try {
     const newQuestion = await Question.create({ ...req.body });
-    res.status(200).json(newQuestion)
+    res.status(200).json(newQuestion);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
 // route to update a specific question
-router.put("/update-question/:id", withAuth, async (req, res) => {
+router.put('/update-question/:id', withAuth, async (req, res) => {
   try {
     const updateQuestion = Question.update(
       {
@@ -32,10 +32,10 @@ router.put("/update-question/:id", withAuth, async (req, res) => {
       }
     );
     if (!updateQuestion) {
-      res.status(400).json({ message: "Could not update question!" });
+      res.status(400).json({ message: 'Could not update question!' });
       return;
     }
-    res.status(200).json({ message: "Question updated successfully!" });
+    res.status(200).json({ message: 'Question updated successfully!' });
   } catch (err) {
     res.status(500).json(err);
   }
