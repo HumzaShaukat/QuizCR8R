@@ -2,6 +2,7 @@ const router = require("express").Router();
 const withAuth = require('../utils/auth')
 const { User, QuizList, Score } = require('../models');
 
+// if you are logged in, you will be redirected to the profile page
 router.get('/', withAuth, async (req, res) => {
   try {
     res.redirect('/profile');
@@ -11,6 +12,7 @@ router.get('/', withAuth, async (req, res) => {
   return;
 });
 
+// route to log in to your account
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     try {
@@ -23,6 +25,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// route that will pull all quizzes you have created
 router.get('/profile', withAuth, async (req, res) => {
   const quizData = await QuizList.findAll({
     where: { user_id: req.session.user_id }
@@ -33,6 +36,7 @@ router.get('/profile', withAuth, async (req, res) => {
   return;
 });
 
+// route that pulls your scores from all the quizzes you have taken
 router.get('/profile/scores', withAuth, async (req, res) => {
   const scoreData = await Score.findAll({
     where: {
@@ -57,6 +61,7 @@ router.get('/profile/scores', withAuth, async (req, res) => {
   return;
 });
 
+// route to update your user information
 router.get('/update-user', withAuth, async (req, res) => {
   const userData = await User.findByPk(req.session.user_id);
   const user = userData.get({ plain: true });
@@ -64,6 +69,7 @@ router.get('/update-user', withAuth, async (req, res) => {
   return;
 });
 
+// route for the signup page
 router.get('/signup', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/profile');

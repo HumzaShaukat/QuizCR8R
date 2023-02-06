@@ -2,6 +2,7 @@ const router = require("express").Router();
 const withAuth = require('../utils/auth')
 const { QuizList, Question } = require('../models');
 
+// route will render the take-quiz handlebars and load the data of the quiz you selected
 router.get('/:id', async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id, {

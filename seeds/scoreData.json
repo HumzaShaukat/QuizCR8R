@@ -33,5 +33,25 @@
     "user_id": 1,
     "quiz_id": 2,
     "score": "60"
+  },
+  {
+    "user_id": 3,
+    "quiz_id": 2,
+    "score": "100"
+  },
+  {
+    "user_id": 3,
+    "quiz_id": 1,
+    "score": "80"
+  },
+  {
+    "user_id": 4,
+    "quiz_id": 2,
+    "score": "40"
+  },
+  {
+    "user_id": 4,
+    "quiz_id": 1,
+    "score": "10"
   }
 ]

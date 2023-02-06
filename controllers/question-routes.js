@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Question, QuizList } = require("../models");
 const withAuth = require('../utils/auth')
 
+// route will get all questions created by you
 router.get("/", withAuth, async (req, res) => {
   try {
     const questionData = await Question.findAll({ where: { user_id: req.session.user_id } });
@@ -12,6 +13,7 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
+// route that will render the data of a question you created
 router.get("/:id", withAuth, async (req, res) => {
   try {
     const questionData = await Question.findByPk(req.params.id, {
@@ -35,6 +37,7 @@ router.get("/:id", withAuth, async (req, res) => {
   }
 })
 
+// route will pull the data from a previously created question to update and render the update-question handlebars
 router.get("/update-question/:id", withAuth, async (req, res) => {
   try {
     const questionData = await Question.findByPk(req.params.id, {
