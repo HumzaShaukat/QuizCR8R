@@ -25,7 +25,7 @@ To use this application you will need to have an account. On the home page there
 ![Scores](./images/quiz-cr8r-scores.png)
 ![Create Quiz](./images/quiz-cr8r-createQuiz.png)
 ![Add Question](./images/quiz-cr8r-addQuestion.png)
-![Question List](./images/quic-cr8r-questionList.png)
+![Question List](./images/quiz-cr8r-questionList.png)
 ![Quiz Info](./images/quiz-cr8r-quiz.png)
 
 ## Credits
