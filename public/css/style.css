@@ -427,7 +427,7 @@ aside {
     align-items: center;
     justify-content: space-between;
     width: 20vw;
-    height: 75vh;
+    height: 65vh;
     margin: 50px 5px 5px 10px;
 }
 
@@ -455,7 +455,7 @@ aside {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 75vh;
+    height: 65vh;
     width: 100%;
     border: 1px solid whitesmoke;
     border-radius: 8px;
