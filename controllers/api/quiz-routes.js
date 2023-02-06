@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { QuizList, Question } = require("../../models");
 const withAuth = require('../../utils/auth')
 
+// route to create a quiz
 router.post("/", withAuth, async (req, res) => {
   try {
     const newQuizList = await QuizList.create({
@@ -15,6 +16,7 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
+// route to update the title/name
 router.put("/:id", withAuth, async (req, res) => {
   try {
     const updateQuizList = QuizList.update(
@@ -83,6 +85,8 @@ router.put("/:id", withAuth, async (req, res) => {
 //   }
 // });
 //temp comment
+
+// route to delete a quiz
 router.delete("/:id", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.destroy({ where: { id: req.params.id } });
