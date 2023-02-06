@@ -59,6 +59,6 @@ module.exports = function () {
       var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
       hbs.registerPartial(name, template);
     });
-  }
+  };
   loadJS();
-}
+};

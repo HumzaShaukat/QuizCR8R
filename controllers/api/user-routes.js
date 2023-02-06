@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
-var bcrypt = require("bcrypt");
+var bcrypt = require('bcrypt');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
       req.session.loggedIn = true;
       req.session.username = dbUserData.username;
       req.session.email = dbUserData.email;
-      req.session.user_id = dbUserData.id
+      req.session.user_id = dbUserData.id;
 
       res.status(200).json(dbUserData);
     });
@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
       req.session.loggedIn = true;
       req.session.username = dbUserData.username;
       req.session.email = dbUserData.email;
-      req.session.user_id = dbUserData.id
+      req.session.user_id = dbUserData.id;
 
       res
         .status(200)
@@ -102,7 +102,7 @@ router.put('/update-user/:id', withAuth, async (req, res) => {
         res
           .status(200)
           .json({ newDbUserData, message: 'Profile updated' })
-          .end()
+          .end();
       });
     } else {
       res.status(404).end();
@@ -110,5 +110,5 @@ router.put('/update-user/:id', withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
 module.exports = router;

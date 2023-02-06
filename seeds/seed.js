@@ -4,7 +4,7 @@ const { User, Question, QuizList, Score } = require('../models');
 const userData = require('./userData.json');
 const quizData = require('./quizData.json');
 const questionData = require('./questionData.json');
-const scoreData = require('./scoreData.json')
+const scoreData = require('./scoreData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });

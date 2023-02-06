@@ -1,5 +1,5 @@
-const router = require("express").Router();
-const withAuth = require('../utils/auth')
+const router = require('express').Router();
+const withAuth = require('../utils/auth');
 const { User, QuizList, Score } = require('../models');
 
 // if you are logged in, you will be redirected to the profile page
@@ -31,8 +31,8 @@ router.get('/profile', withAuth, async (req, res) => {
     where: { user_id: req.session.user_id }
   });
   const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
-  const username = req.session.username
-  res.render("profile", { quizzes, username, loggedIn: req.session.loggedIn });
+  const username = req.session.username;
+  res.render('profile', { quizzes, username, loggedIn: req.session.loggedIn });
   return;
 });
 
@@ -56,8 +56,8 @@ router.get('/profile/scores', withAuth, async (req, res) => {
     attributes: ['score']
   });
   const score = scoreData.map((score) => score.get({ plain: true }));
-  const username = req.session.username
-  res.render("user-scores", { score, username, loggedIn: req.session.loggedIn });
+  const username = req.session.username;
+  res.render('user-scores', { score, username, loggedIn: req.session.loggedIn });
   return;
 });
 
@@ -65,7 +65,7 @@ router.get('/profile/scores', withAuth, async (req, res) => {
 router.get('/update-user', withAuth, async (req, res) => {
   const userData = await User.findByPk(req.session.user_id);
   const user = userData.get({ plain: true });
-  res.render("update-user", { user, loggedIn: req.session.loggedIn });
+  res.render('update-user', { user, loggedIn: req.session.loggedIn });
   return;
 });
 
