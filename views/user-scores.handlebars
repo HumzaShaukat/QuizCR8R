@@ -5,9 +5,29 @@
   </div>
   <ul id="quiz-scores-list">
     {{#each score}}
-    <li class="scores" quiz-id="{{quiz_list.id}}">{{quiz_list.quiz_title}} - {{score}}</li>
+    <li class="scores aos-animate" data-aos="fade-right" quiz-id="{{quiz_list.id}}">{{quiz_list.quiz_title}} - {{score}}</li>
     {{/each}}
   </ul>
 </div>
 
-<script src="../../js/userscores.js"></script>
+<script src="../../js/userscores.js" type="module"></script>
+{{!-- This following setting is for integrating AOS into our scroll bar.  Because we have node_modules ignored,
+it becomes difficult to import aos without doing in the html. --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script> 
+<script>
+  if( (window.innerWidth || document.documentElement.clientWidth) > 768) {
+    AOS.init({
+      startEvent: "DOMContentLoaded"
+    });
+  }
+  window.onresize = function(event) {
+    if (screen.availWidth > 768) {
+      AOS.init({
+        disable: function() {
+          var maxWidth = 768;
+          return window.innerWidth < maxWidth;
+          }
+      });
+    }
+  };
+</script>
