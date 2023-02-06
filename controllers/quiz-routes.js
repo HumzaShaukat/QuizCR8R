@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { QuizList, Question, Score, User } = require("../models");
 const withAuth = require("../utils/auth");
 
+// route will render the quiz-list handlebars
 router.get("/", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findAll();
@@ -12,6 +13,7 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
+// route will render the quiz-list handlebars with all quizzes created by you
 router.get("/:id", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id, {
@@ -47,6 +49,7 @@ router.get("/:id", withAuth, async (req, res) => {
   }
 });
 
+// route will render the update-quiz-title handlebar for quizzes created by you
 router.get("/update-quiz/:id", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id);
@@ -66,6 +69,7 @@ router.get("/update-quiz/:id", withAuth, async (req, res) => {
   }
 });
 
+// route will render the quiz-scores handlebar with your scores on previously taken quizzes
 router.get("/scores/:id", withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id);
