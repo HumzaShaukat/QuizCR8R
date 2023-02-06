@@ -1,3 +1,4 @@
+
 const scoreList = document.querySelector('#quiz-scores-list');
 
 scoreList.addEventListener('click', async (event) => {
