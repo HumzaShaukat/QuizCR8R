@@ -440,7 +440,7 @@ aside {
     align-items: center;
     height: 25vh;
     width: 25vh;
-    border: 1px solid whitesmoke;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -457,7 +457,7 @@ aside {
     align-items: center;
     height: 65vh;
     width: 100%;
-    border: 1px solid whitesmoke;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 8px;
     padding: 5px;
     margin: 50px 10px 5px 5px;
