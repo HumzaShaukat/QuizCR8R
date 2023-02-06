@@ -1,20 +1,20 @@
-const router = require("express").Router();
-const { QuizList, Question, Score, User } = require("../models");
-const withAuth = require("../utils/auth");
+const router = require('express').Router();
+const { QuizList, Question, Score, User } = require('../models');
+const withAuth = require('../utils/auth');
 
 // route will render the quiz-list handlebars
-router.get("/", withAuth, async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findAll();
     const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
-    res.render("quizlist", { quizzes, loggedIn: req.session.loggedIn });
+    res.render('quizlist', { quizzes, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // route will render the quiz-list handlebars with all quizzes created by you
-router.get("/:id", withAuth, async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id, {
       include: Question,
@@ -23,43 +23,43 @@ router.get("/:id", withAuth, async (req, res) => {
     for (var i = 0; i < quiz.questions.length; i++) {
       let answerMatch;
       if (quiz.questions[i].answer === Object.keys(quiz.questions[0])[2]) {
-        answerMatch = "A";
+        answerMatch = 'A';
       } else if (
         quiz.questions[i].answer === Object.keys(quiz.questions[0])[3]
       ) {
-        answerMatch = "B";
+        answerMatch = 'B';
       } else if (
         quiz.questions[i].answer === Object.keys(quiz.questions[0])[4]
       ) {
-        answerMatch = "C";
+        answerMatch = 'C';
       } else if (
         quiz.questions[i].answer === Object.keys(quiz.questions[0])[5]
       ) {
-        answerMatch = "D";
+        answerMatch = 'D';
       }
       quiz.questions[i].answerMatch = answerMatch;
     }
     if (!quizData) {
-      res.status(400).json({ message: "Quiz Not Found" });
+      res.status(400).json({ message: 'Quiz Not Found' });
       return;
     }
-    res.render("quizdata", { quiz, loggedIn: req.session.loggedIn });
+    res.render('quizdata', { quiz, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // route will render the update-quiz-title handlebar for quizzes created by you
-router.get("/update-quiz/:id", withAuth, async (req, res) => {
+router.get('/update-quiz/:id', withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id);
     if (!quizData) {
-      res.status(400).json({ message: "Quiz Not Found" });
+      res.status(400).json({ message: 'Quiz Not Found' });
       return;
     }
     const quiz = quizData.get({ plain: true });
     quizMin = quiz.time / 60;
-    res.render("update-quiz-title", {
+    res.render('update-quiz-title', {
       quizMin,
       quiz,
       loggedIn: req.session.loggedIn,
@@ -70,7 +70,7 @@ router.get("/update-quiz/:id", withAuth, async (req, res) => {
 });
 
 // route will render the quiz-scores handlebar with your scores on previously taken quizzes
-router.get("/scores/:id", withAuth, async (req, res) => {
+router.get('/scores/:id', withAuth, async (req, res) => {
   try {
     const quizData = await QuizList.findByPk(req.params.id);
     const quizInfo = quizData.get({ plain: true });
@@ -79,25 +79,25 @@ router.get("/scores/:id", withAuth, async (req, res) => {
       where: {
         quiz_id: req.params.id,
       },
-      order: [["score", "DESC"]],
+      order: [['score', 'DESC']],
       include: [
         {
           model: User,
-          attributes: ["username"],
+          attributes: ['username'],
         },
         {
           model: QuizList,
-          attributes: ["quiz_title"],
+          attributes: ['quiz_title'],
         },
       ],
-      attributes: ["score"],
+      attributes: ['score'],
     });
     if (!scoreData) {
-      res.status(400).json({ message: "Quiz Not Found" });
+      res.status(400).json({ message: 'Quiz Not Found' });
       return;
     }
     const score = scoreData.map((score) => score.get({ plain: true }));
-    res.render("quiz-scores", {
+    res.render('quiz-scores', {
       quizInfo,
       score,
       loggedIn: req.session.loggedIn,
