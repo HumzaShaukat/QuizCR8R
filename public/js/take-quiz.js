@@ -130,7 +130,7 @@ choiceList.addEventListener("click", async (event) => {
       questions.shift();
       renderQuestion();
     } else {
-      endQuiz();
+      quizTime = 0;
     }
   }
 });
