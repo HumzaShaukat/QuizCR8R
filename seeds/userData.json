@@ -8,5 +8,15 @@
     "username":"howardrocks",
     "email": "user2@email.com",
     "password": "password"
+  },
+  {
+    "username": "JeaustinTime",
+    "email": "jeaustin@email.com",
+    "password": "password"
+  },
+  {
+    "username": "eric1477",
+    "email": "eric@email.com",
+    "password": "password"
   }
 ]
